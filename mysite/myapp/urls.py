@@ -16,9 +16,20 @@ Including another URLconf
 
 from django.urls import path, include
 from myapp import views
+from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('index', views.index, name='index'),
     path('register', views.register, name='register'),
 
+   path('login/', LoginView.as_view(template_name='myapp/login.html'), name='login'),
+   path('logout/', LogoutView.as_view(template_name='myapp/logout.html'), name='logout'),
+   
 ]
+
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
