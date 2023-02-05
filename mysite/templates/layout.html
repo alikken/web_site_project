@@ -1,28 +1,53 @@
 <html lang="ru">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/main.css"/>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />
+  </head>
     {% block title %}{% endblock  %}
     <body>
-        <div class="container">
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      
-              <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Кино</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Новости</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Кинотеатры</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Рецензии</a></li>
-              </ul>
-        
-              <div class="col-md-3 text-end">
-                <a href="{% url 'login' %}" class="btn btn-primary me-2">Войти</button>
-      
-                <a href="{% url 'register' %}" class="btn btn-primary me-2">Регистрация</a>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
-                <a href="{% url 'logout' %}" class="btn btn-primary me-2">Logout?</a>
+        <header class="p-3 text-bg-dark">
+          <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+              <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+              </a>
       
+              <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="" class="nav-link px-2 text-secondary">Новости</a></li>
+                <li><a href="" class="nav-link px-2 text-white">Кино</a></li>
+                <li><a href="" class="nav-link px-2 text-white">Кинотеатры</a></li>
+              </ul>
+
+      
+              <div class="text-end">
+                <a type="button" href="{% url 'login' %}" class="btn btn-outline-light me-2">Вход</a>
+                <a type="button" href="{% url 'register' %}" class="btn btn-warning">Регистрация</a>
               </div>
-            </header>
+
+            </div>
+
+
+            
           </div>
+
+          
+
+        </header>
+
+
+
+
+
+
+      
+
+
+
+
           {% block content %}{% endblock  %}
     </body>
 </html>
