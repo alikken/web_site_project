@@ -26,13 +26,23 @@ class CustomUserManager(BaseUserManager):
 
 
 
+class City(models.Model):
+
+    name = models.CharField(("Выберете город"), max_length=50)
+
+    class Meta:
+        verbose_name = "Город"
+        verbose_name_plural = 'Города'
+
+
 class CustomUser(User):
 
     phone_number = models.CharField(("Номер телефона"), max_length=50)
-    city = models.CharField(("Город"), max_length=50)
+
 
     objects = CustomUserManager()
 
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = 'Пользователи'
+
