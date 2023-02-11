@@ -16,9 +16,19 @@ Including another URLconf
 
 from django.urls import path, include
 from myapp import views
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import CustomLogin, CustomLogout
+
 
 urlpatterns = [
     path('index', views.index, name='index'),
-    path('register', views.register, name='register'),
+    path('register/', views.register, name='register'),
 
+   path('login/', views.CustomLogin.as_view(), name='login'),
+   path('logout/', views.CustomLogout.as_view(), name='logout'),
+   
 ]
+
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
