@@ -3,24 +3,27 @@
 
 
 <h3>register</h3>
-
+{% block content %}
+{% load widget_tweaks %} 
 
 
 <form action="" method="POST">
     {% csrf_token %}
-    {% comment %} <div class="container">
+    <div class="container">
         {% for field in form %}
         <div>
-            <p>{{field.label}}: <br> {{field}}</p>
+            <p>{{field.label}}: <br> {{field|attr:"class: form-control"}}</p>
             {% for error in field.errors %}
                 <small style="color: red">{{error}}</small>
                 
             {% endfor %}
         </div>
         {% endfor %}
-    </div> {% endcomment %}
+    </div> 
 
 
 
     <button type="submit">register</button>
 </form> 
+
+{%endblock%}
