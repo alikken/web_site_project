@@ -1,6 +1,34 @@
 {% extends 'layout.html' %}
 
+
+{% comment %} {% include "layout.html" %} {% endcomment %}
+
 {% block content %}
 
+
+
+
+
+
+
+  {% comment %} <div class="container">
+    <div class="list-group">
+
+      {% for a in citys %}
+        <p>{{a}}</p>
+      {% endfor %}
+    </div>
+  </div> {% endcomment %}
+  <body>
+    <div class="btn">
+        <div class="content">
+        </div>
+    </div>
+    <div class="block2">
+        {% for city in citys %}
+            <h2>Город: {{ city }}</h2>
+        {% endfor %}
+    </div>
+</body>
 {% endblock content %}
 
