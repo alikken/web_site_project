@@ -4,7 +4,6 @@
 
 {% load widget_tweaks %} 
 
-
 {% comment %} <form action="" method="POST">
     {% csrf_token %}
     <div class="container">
@@ -22,8 +21,7 @@
 
 
     <button type="submit">register</button>
-</form>  {% endcomment %}
-
+</form>   {% endcomment %}
 
 <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
     <div class="modal-dialog" role="document">
@@ -33,25 +31,21 @@
         </div>
 
         <div class="modal-body p-5 pt-0">
-          <form class="" action="{% url 'index' %}" method="POST">
-            <div>
-                {% csrf_token %}
-                {%for field in form%}
-                <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>
-                {% for error in field.errors %}
-                    <small style="color: red">{{error}}</small>
-                
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                {% for field in form %}
+                <div>
+                    <p>{{field.label}}: <br> {{field|attr:"class: form-control"}}</p>
+                    {% for error in field.errors %}
+                        <small style="color: red">{{error}}</small>
+                        
                     {% endfor %}
+                </div>
                 {% endfor %}
-            </div>
-
-
+            </div> 
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Зарегистрироваться</button>
             <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-            
-
-            
-
           </form>
         </div>
       </div>

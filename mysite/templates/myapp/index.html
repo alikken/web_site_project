@@ -5,30 +5,53 @@
 
 {% block content %}
 
+<div class="container">
+  <div class="display-6 text-white">Кинотеатры:
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
+      <ul class="dropdown-menu show" data-bs-popper="static">
+          {% for city in citys %}
+          <li><a class="dropdown-item" href="#">{{ city }}</a></li>
+          {% endfor %}
+      </ul>
+    </div> 
+  </div>
 
 
 
-
-
-
-  {% comment %} <div class="container">
-    <div class="list-group">
-
-      {% for a in citys %}
-        <p>{{a}}</p>
-      {% endfor %}
-    </div>
-  </div> {% endcomment %}
-  <body>
-    <div class="btn">
-        <div class="content">
+<div class="col-lg-9">
+  <div class="row">
+    {% for cinema in cinemas %}
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+            <a href="#">
+                <img class="card-img-top"
+                     src="{{cinema.image}}"
+                     alt="">
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="#">{{cinema.cinema}}</a>
+                </h4>
+                <h5>{{cinema.city}}</h5>
+                <p class="card-text">{{cinema.address}}</p>
+            </div>
+            {% comment %} <div class="card-footer text-center">
+                <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+            </div> {% endcomment %}
         </div>
     </div>
-    <div class="block2">
+    
+    {% endfor %}
+</div>
+</div>
+
+
+    {% comment %} <div class="block2">
         {% for city in citys %}
             <h2>Город: {{ city }}</h2>
         {% endfor %}
     </div>
-</body>
+</body>  {% endcomment %}
 {% endblock content %}
 

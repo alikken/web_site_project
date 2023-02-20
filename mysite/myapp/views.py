@@ -15,12 +15,7 @@ from django.http.request import HttpRequest
 def index(request: HttpRequest) -> HttpRequest:
     """index view."""
 
-    # numbers: list[int] = []
-    # i: int
-    # for i in range(1, 11):
-    #     numbers.append(i)
-
-    ctx_data  = {
+    context  = {
             'title': 'Заголовок - сайт',
             'cinemas': Cinemas.objects.all(),
             'citys': CitysLocation.objects.all(),
@@ -28,7 +23,7 @@ def index(request: HttpRequest) -> HttpRequest:
     return render(
         request,
         template_name='myapp/index.html',
-        context=ctx_data
+        context=context
     )
 
 
@@ -65,12 +60,16 @@ class CustomLogout(LogoutView):
         return resolve_url('login')
 
 
-# class CityCinemas(View):
-#     def get(request):
-#         context = {
-#             'title': 'Заголовок - сайт',
-#             'cinemas': Cinemas.objects.all(),
-#             'citys': CitysLocation.objects.name(),
-#         }
-#         print(Cinemas.objects.all())
-#         return render(request, 'myapp/index.html', context=context)
+
+# def index(request: HttpRequest) -> HttpRequest:
+#     context = {
+#         'title': 'Заголовок - сайт',
+#         'cinemas': Cinemas.objects.all(),
+#         'citys': CitysLocation.objects.name,
+#     }
+
+#     return render(
+#         request,
+#         template_name='myapp/index.html',
+#         context=context
+#     )

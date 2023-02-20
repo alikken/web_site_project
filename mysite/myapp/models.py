@@ -42,6 +42,7 @@ class Cinemas(models.Model):
     cinema = models.CharField(max_length=128)
     address = models.TextField()
     city = models.ForeignKey(to=CitysLocation, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media')
 
     class Meta:
         verbose_name = "Кинотеатр"
