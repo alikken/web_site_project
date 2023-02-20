@@ -25,17 +25,12 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('register/', views.register, name='register'),
 
-   path('login/', views.CustomLogin.as_view(), name='login'),
-   path('logout/', views.CustomLogout.as_view(), name='logout'),
-   
-   
+    path('login/', views.CustomLogin.as_view(), name='login'),
+    path('logout/', views.CustomLogout.as_view(), name='logout'),
 ]
-
-
-
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:
-    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

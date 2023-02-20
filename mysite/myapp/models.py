@@ -22,12 +22,19 @@ class CustomUserManager(BaseUserManager):
         user.save()
         return user
 
+class CustomUser(User):
 
+    phone_number = models.CharField(("Номер телефона"), max_length=50)
+    objects = CustomUserManager()
+
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = 'Пользователи'
 
 
 class CitysLocation(models.Model):
 
-    name = models.CharField(("Город"), max_length=50, unique=True)
+    name = models.CharField(("Город"), max_length=128, unique=True)
 
     class Meta:
         verbose_name = "Город"
@@ -51,15 +58,12 @@ class Cinemas(models.Model):
     def __str__(self) -> str:
         return self.cinema
 
+class Films(models.Model):
+    film = models.CharField(max_length=128)
+    descript = models.TextField()
+    image = models.ImageField()
 
-class CustomUser(User):
 
-    phone_number = models.CharField(("Номер телефона"), max_length=50)
-    objects = CustomUserManager()
-
-    class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = 'Пользователи'
 
 
 

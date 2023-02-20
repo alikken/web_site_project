@@ -12,6 +12,10 @@
           <h1 class="fw-bold mb-0 fs-2">Войти в аккаунт</h1>
         </div>
 
+        {% comment %} {% for theatre in theatres %}
+          <img src='/myapp{{theatre.image.url}}'>
+        {% endfor %} {% endcomment %}
+
         <div class="modal-body p-5 pt-0">
           <form class="" action="{% url 'index' %}" method="POST">
             {% csrf_token %}

@@ -48,6 +48,11 @@ def register(request):
 class CustomLogin(LoginView):
     template_name = 'myapp/login.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['theatres'] = Cinemas.objects.all()
+    #     return context
+
     def ger_success_url(self):
         return resolve_url('index')
 
