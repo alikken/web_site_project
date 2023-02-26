@@ -18,10 +18,13 @@
           {% comment %} <li><a href="" class="nav-link px-2 text-white">Кинотеатры</a></li> {% endcomment %}
           
         </ul>
+
         <div class="text-end">
-          {% if not user.is_authenticated %}
+          {% if user.is_authenticated %}
+            <p>Вы вошли в систему как {{ user.username }}.</p>
             <a type="button" href='{% url 'logout' %}' class="btn btn-outline-light me-2">Выйти</a>
           {% else %}
+            <p>Вы не вошли в систему.</p>
             <a type="button" href='{% url 'login' %}' class="btn btn-outline-light me-2">Войти</a>
           {% endif %}
           

@@ -32,7 +32,11 @@ class CustomUser(User):
         verbose_name_plural = 'Пользователи'
 
 
-class CitysLocation(models.Model):
+
+
+
+
+class CityLocation(models.Model):
 
     name = models.CharField(("Город"), max_length=128, unique=True)
 
@@ -43,12 +47,12 @@ class CitysLocation(models.Model):
     def __str__(self) -> str:
         return self.name
     
-class Cinemas(models.Model):
+class Cinema(models.Model):
 
     """Добавить описание кинотеатра и еще немного характеристик"""
     cinema = models.CharField(max_length=128)
     address = models.TextField()
-    city = models.ForeignKey(to=CitysLocation, on_delete=models.CASCADE)
+    city = models.ForeignKey(to=CityLocation, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='media')
 
     class Meta:
@@ -68,16 +72,3 @@ class Films(models.Model):
 
 
 
-# class ProductCategory(models.Model):
-#     name = models.CharField(max_length=128)
-#     description = models.TextField(null=True, blank=True)
-
-#     def __str__(self) -> str:
-#         return self.name
-
-# class Product(models.Model):
-#     name = models.CharField(max_length=256)
-#     description = models.TextField()
-#     price = models.DecimalField(max_digits=6, decimal_places=2)
-#     quantity = models.PositiveIntegerField(default=0)
-#     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
