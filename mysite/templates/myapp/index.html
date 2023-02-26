@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 
-{% comment %} {% include "layout.html" %} {% endcomment %}
+
 
 {% block content %}
 
@@ -11,14 +11,11 @@
       <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
       <ul class="dropdown-menu show" data-bs-popper="static">
           {% for city in citys %}
-           
-            <li><a class="dropdown-item" href="#">{{ city }}</a></li>
+            <li><a class="dropdown-item " href="">{{ city.name }}</a></li>
           {% endfor %}
       </ul>
     </div> 
   </div>
-
-
 
 <div class="col-lg-9">
   <div class="row">
@@ -37,9 +34,6 @@
                 <h5>{{cinema.city}}</h5>
                 <p class="card-text">{{cinema.address}}</p>
             </div>
-            {% comment %} <div class="card-footer text-center">
-                <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
-            </div> {% endcomment %}
         </div>
     </div>
     
@@ -48,11 +42,7 @@
 </div>
 
 
-    {% comment %} <div class="block2">
-        {% for city in citys %}
-            <h2>Город: {{ city }}</h2>
-        {% endfor %}
-    </div>
-</body>  {% endcomment %}
+
+
 {% endblock content %}
 

@@ -14,5 +14,3 @@ admin.site.register(CityLocation)
 
 
 
-# admin.site.register(Product)
-# admin.site.register(ProductCategory)
