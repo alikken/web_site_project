@@ -19,12 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import CustomLogin, CustomLogout
 from django.conf import settings
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('index', views.index, name='index'),
     path('register/', views.register, name='register'),
     path('login/', views.CustomLogin.as_view(), name='login'),
     path('logout/', views.CustomLogout.as_view(), name='logout'),
+
+    # path('login/', LoginView.as_view(template_name = 'myapp/login.html'), name='login'),
+    # path('logout/', LogoutView.as_view(template_name = 'myapp/logged_out.html'), name='logout'),
 ]
 
 

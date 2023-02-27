@@ -11,8 +11,6 @@ from django.http.request import HttpRequest
 from django.urls import reverse_lazy
 
 
-
-
 def index(request: HttpRequest) -> HttpRequest:
     """index view."""
 
@@ -44,7 +42,11 @@ def register(request):
         form = UserRegistrationForm()
 
     context = {'form': form}
-    return render(request, 'myapp/registration.html', context)
+    return render(
+        request, 
+        'myapp/registration.html', 
+        context=context
+        )
 
 class CustomLogin(LoginView):
     template_name = 'myapp/login.html'
