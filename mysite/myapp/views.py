@@ -6,22 +6,25 @@ from .forms import UserRegistrationForm
 from .models import Cinema, CityLocation
 from django.shortcuts import resolve_url
 from django.views.generic import View
-# Create your views here.
 from django.http.request import HttpRequest
-from django.urls import reverse_lazy
+
 
 
 def index(request: HttpRequest) -> HttpRequest:
     """index view."""
+    return render(request, template_name='myapp/index.html')
 
-    context  = {
-            'title': 'Заголовок - сайт',
-            'cinemas': Cinema.objects.all(),
-            'citys': CityLocation.objects.all(),
+def cinema_list(request: HttpRequest) -> HttpRequest:
+    """Список кинотеатров"""
+
+    context = {
+        'title': "Заголовок - сайт",
+        'cinemas': Cinema.objects.all(),
+        'citis': CityLocation.objects.all(),
     }
     return render(
         request,
-        template_name='myapp/index.html',
+        template_name='myapp/cinema.html',
         context=context
     )
 

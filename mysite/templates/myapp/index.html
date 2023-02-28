@@ -3,43 +3,5 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="display-6 text-white">Кинотеатры:
-    <div class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
-      <ul class="dropdown-menu show" data-bs-popper="static">
-          {% for city in citys %}
-            <li><a class="dropdown-item " href="">{{ city.name }}</a></li>
-          {% endfor %}
-      </ul>
-    </div> 
-  </div>
-
-<div class="col-lg-9">
-  <div class="row">
-    {% for cinema in cinemas %}
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-            <a href="#">
-              
-                <img class="card-img-top"
-                     src="/myapp{{cinema.image.url}}"
-                     alt="">
-            </a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#">{{cinema.cinema}}</a>
-                </h4>
-                <h5>{{cinema.city}}</h5>
-                <p class="card-text">{{cinema.address}}</p>
-            </div>
-        </div>
-    </div>
-    
-    {% endfor %}
-</div>
-</div>
-
-
 {% endblock content %}
 
