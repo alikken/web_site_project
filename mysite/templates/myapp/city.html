@@ -1,20 +1,17 @@
 {% extends 'layout.html' %}
 
-
 {% block content %}
-<div class="container">
-    <div class="display-6 text-white">Кинотеатры:
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
-        <ul class="dropdown-menu show" data-bs-popper="static">
-            {% for city in citis %}
-              <li><a class="dropdown-item " href="">{{ city.name }}</a></li>
-            {% endfor %}
-        </ul>
-      </div> 
-    </div>
-  
-  <div class="col-lg-9">
+<div class='container'>
+  <div class="display-6 text-white">Кинотеатры:
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
+      <ul class="dropdown-menu show" data-bs-popper="static">
+          {% for a in city_list %}
+            <li><a class="dropdown-item " href="/myapp/{{a.url}}">{{ a.name }}</a></li>
+          {% endfor %}
+      </ul>
+  </div> 
+  {% comment %} <div class="col-lg-9">
     <div class="row">
       {% for cinema in cinemas %}
       <div class="col-lg-4 col-md-6 mb-4">
@@ -37,6 +34,6 @@
       
       {% endfor %}
   </div>
-  </div>
+</div> {% endcomment %}
 
 {% endblock content %}

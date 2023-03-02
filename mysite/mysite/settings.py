@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'widget_tweaks',
     'myapp',
+    'movies',
 ]
 
 MIDDLEWARE = [

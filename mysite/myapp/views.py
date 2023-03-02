@@ -14,19 +14,46 @@ def index(request: HttpRequest) -> HttpRequest:
     """index view."""
     return render(request, template_name='myapp/index.html')
 
-def cinema_list(request: HttpRequest) -> HttpRequest:
-    """Список кинотеатров"""
 
-    context = {
-        'title': "Заголовок - сайт",
-        'cinemas': Cinema.objects.all(),
-        'citis': CityLocation.objects.all(),
-    }
-    return render(
-        request,
-        template_name='myapp/cinema.html',
-        context=context
-    )
+
+# class CityList(View):
+#     def get(self, request):
+#         """Список Городов"""
+
+#         context = {
+#             'citis': CityLocation.objects.all(),
+#         }
+#         return render(
+#             request,
+#             template_name='myapp/cinema.html',
+#             context=context
+#         )
+
+# class CinemaView(View):
+#     def get(self, request):
+
+#         context = {
+#             'cinemas': Cinema.objects.all(),
+#             'citis': CityLocation.objects.all(),
+#         }
+#         return render(request, 'myapp/cinema.html', context=context)
+    
+# class CinemaDetailView(View):
+#     def get(self, request, pk):
+#         cinema = CityLocation.objects.get(id=pk)
+#         return render(request, 'myapp/cinema.html', {"citis":cinema})
+
+
+class CityView(View):
+    def get(self, request):
+        citys = CityLocation.objects.all()
+        return render(request, 'myapp/city.html', {"city_list": citys})
+
+class CityDetailView(View):
+    def get(self, request, pk):
+        city = CityLocation.objects.get(id=pk)
+        return render(request, 'myapp/city_detail.html', {"city": city})
+
 
 def register(request):
     if request.method == 'POST':
