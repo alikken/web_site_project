@@ -29,8 +29,9 @@ urlpatterns = [
 
     path('city/', views.CityView.as_view(), name='cinema'),
 
-    path('<int:pk>/', views.CityDetailView.as_view())
-
+    path('<int:pk>/', views.CityDetailView.as_view()),
+    path('<slug:slug>/', views.CinemaDetailView.as_view())
+    
 ]
 
 

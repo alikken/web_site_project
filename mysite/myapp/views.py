@@ -59,6 +59,12 @@ class CityDetailView(View):
         return render(request, 'myapp/city_detail.html', {"city": city, 'cinema_list':cinemas})
 
 
+class CinemaDetailView(View):
+    def get(self, request, slug):
+        cinema = Cinema.objects.get(url=slug)
+        return render(request, 'myapp/cinema_detail.html', {"cinema": cinema})
+
+
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
