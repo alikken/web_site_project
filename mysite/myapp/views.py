@@ -47,12 +47,16 @@ def index(request: HttpRequest) -> HttpRequest:
 class CityView(View):
     def get(self, request):
         citys = CityLocation.objects.all()
+        
         return render(request, 'myapp/city.html', {"city_list": citys})
 
 class CityDetailView(View):
     def get(self, request, pk):
         city = CityLocation.objects.get(id=pk)
-        return render(request, 'myapp/city_detail.html', {"city": city})
+        cinemas = city.cinema_set.all()
+        
+
+        return render(request, 'myapp/city_detail.html', {"city": city, 'cinema_list':cinemas})
 
 
 def register(request):
