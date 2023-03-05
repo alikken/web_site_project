@@ -6,42 +6,17 @@ from .forms import UserRegistrationForm
 from .models import Cinema, CityLocation
 from django.shortcuts import resolve_url
 from django.views.generic import View
-from django.http.request import HttpRequest
 
+from django.http.request import HttpRequest
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from django.core import serializers
 
 
 def index(request: HttpRequest) -> HttpRequest:
     """index view."""
     return render(request, template_name='myapp/index.html')
 
-
-
-# class CityList(View):
-#     def get(self, request):
-#         """Список Городов"""
-
-#         context = {
-#             'citis': CityLocation.objects.all(),
-#         }
-#         return render(
-#             request,
-#             template_name='myapp/cinema.html',
-#             context=context
-#         )
-
-# class CinemaView(View):
-#     def get(self, request):
-
-#         context = {
-#             'cinemas': Cinema.objects.all(),
-#             'citis': CityLocation.objects.all(),
-#         }
-#         return render(request, 'myapp/cinema.html', context=context)
-    
-# class CinemaDetailView(View):
-#     def get(self, request, pk):
-#         cinema = CityLocation.objects.get(id=pk)
-#         return render(request, 'myapp/cinema.html', {"citis":cinema})
 
 
 class CityView(View):
@@ -57,6 +32,11 @@ class CityDetailView(View):
         
 
         return render(request, 'myapp/city_detail.html', {"city": city, 'cinema_list':cinemas})
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CityDetailView, self).get_context_data(**kwargs)
+    #     context['city_list'] = CityLocation.objects.all()
+    #     return context
 
 
 class CinemaDetailView(View):
@@ -99,4 +79,10 @@ class CustomLogout(LogoutView):
         return resolve_url('logout')
 
 
+
+@api_view(['GET',])
+def get_theatre_by_city_id(request):
+    cinemas_list = Cinema.objects.filter(city=CityLocation.objects.get(pk=request.GET.get('city_id')))
+
+    return JsonResponse({"cinemas": serializers.serialize('json', cinemas_list)}, safe=False)
 

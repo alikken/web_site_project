@@ -7,10 +7,12 @@
       <a class="nav-link dropdown-toggle show text-white" href="#" data-bs-toggle="dropdown" aria-expanded="true">Dropdown</a>
       <ul class="dropdown-menu show" data-bs-popper="static">
           {% for a in city_list %}
-            <li><a class="dropdown-item " href="/myapp/{{a.url}}">{{ a.name }}</a></li>
+            <li><a class="dropdown-item " data-city-id="{{ a.id }}" id="cinema{{ a.id }}" href="#">{{ a.name }}</a></li>
           {% endfor %}
       </ul>
   </div> 
+
+  <script type="text/javascript" src="/static/js/main.js"></script>
 
 {% endblock content %}
 

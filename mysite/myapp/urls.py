@@ -17,9 +17,15 @@ from django.urls import path, include
 from myapp import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import CustomLogin, CustomLogout
+from .views import CustomLogin, CustomLogout, get_theatre_by_city_id
 from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
     path('index/', views.index, name='index'),
@@ -30,8 +36,12 @@ urlpatterns = [
     path('city/', views.CityView.as_view(), name='cinema'),
 
     path('<int:pk>/', views.CityDetailView.as_view()),
-    path('<slug:slug>/', views.CinemaDetailView.as_view())
+    path('<slug:slug>/', views.CinemaDetailView.as_view()),
+    #urls for jwt auth
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
+    path('get_theatre_by_city_id', get_theatre_by_city_id, name='get_theatre_by_city_id'),
 ]
 
 
