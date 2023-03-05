@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import UserRegistrationForm
-from .models import Cinema, CityLocation
+from .models import Cinema, CityLocation, CustomUser
 from django.shortcuts import resolve_url
 from django.views.generic import View
 
@@ -11,6 +11,9 @@ from django.http.request import HttpRequest
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.core import serializers
+from .serializers import UserSerializer
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 
 def index(request: HttpRequest) -> HttpRequest:
@@ -86,3 +89,8 @@ def get_theatre_by_city_id(request):
 
     return JsonResponse({"cinemas": serializers.serialize('json', cinemas_list)}, safe=False)
 
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
