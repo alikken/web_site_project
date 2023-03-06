@@ -11,9 +11,11 @@ from django.http.request import HttpRequest
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.core import serializers
-from .serializers import UserSerializer
+from .serializers import CinemaSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+
+from django.http import HttpRequest 
 
 
 def index(request: HttpRequest) -> HttpRequest:
@@ -83,14 +85,21 @@ class CustomLogout(LogoutView):
 
 
 
-@api_view(['GET',])
-def get_theatre_by_city_id(request):
-    cinemas_list = Cinema.objects.filter(city=CityLocation.objects.get(pk=request.GET.get('city_id')))
+# @api_view(['GET',])
+# def get_theatre_by_city_id(request):
+#     cinemas_list = Cinema.objects.filter(city=CityLocation.objects.get(pk=request.GET.get('city_id'))).all()
 
-    return JsonResponse({"cinemas": serializers.serialize('json', cinemas_list)}, safe=False)
+#     for cinema in cinemas_list:
+#         print(cinema.city.name)
+
+#     return JsonResponse({"cinemas": serializers.serialize('json', cinemas_list)}, safe=False)
 
 
-class UserListView(generics.ListAPIView):
-    queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+class CinemasListView(generics.ListAPIView):
+    serializer_class = CinemaSerializer
+    
+    def get_queryset(self):
+        print("ASDJSJADBJDADJDSJDSAJDNDNJDA")
+        queryset = Cinema.objects.filter(city=CityLocation.objects.get(pk=self.request.GET.get('city_id'))).all()
+        
+        return queryset

@@ -2,7 +2,8 @@ from rest_framework import serializers
 from myapp import models
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CinemaSerializer(serializers.ModelSerializer):
+    city = serializers.CharField()
     class Meta:
-        model = models.CustomUser
+        model = models.Cinema
         fields = '__all__'
