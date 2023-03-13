@@ -35,8 +35,6 @@ urlpatterns = [
     path('<int:pk>/', views.CityDetailView.as_view()),
     path('<slug:slug>/', views.CinemaDetailView.as_view()),
     #urls for jwt auth
-
-    
     path('get_theatre_by_city_id', views.CinemasListView.as_view(), name='get_theatre_by_city_id'),
 ]
 

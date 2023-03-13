@@ -16,6 +16,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from django.http import HttpRequest 
+from rest_framework.response import Response
 
 
 def index(request: HttpRequest) -> HttpRequest:
@@ -99,7 +100,10 @@ class CinemasListView(generics.ListAPIView):
     serializer_class = CinemaSerializer
     
     def get_queryset(self):
-        print("ASDJSJADBJDADJDSJDSAJDNDNJDA")
+        
         queryset = Cinema.objects.filter(city=CityLocation.objects.get(pk=self.request.GET.get('city_id'))).all()
+        print(list(queryset))
         
         return queryset
+    
+

@@ -7,3 +7,4 @@ class CinemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Cinema
         fields = '__all__'
+        

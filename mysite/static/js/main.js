@@ -11,39 +11,38 @@ $(document).ready(() => {
             },
             
             success: (response) => {
-                parsed = JSON.parse(response.cinemas);
+                console.log(response)
+                
+                
+                
+
                 
                 $("#result").html('');
-                parsed.forEach(cinema=> {
-                    var cinemaName = cinema.fields.all;
-                    debugger
-                    
+                response.forEach(cinema=> {
                     
                     $("#result").append(`
                         <div style="float: left;">
                             <div class="card" style="width: 18rem;>
                                 <a href="#">
                                     <img class="img-top-fluid"
-                                        src="/media/${cinema.fields.image}"
+                                        src="${cinema.image}"
                                         alt="">
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="/myapp/${cinema.fields.url}">${cinema.fields.cinema}</a>
+                                        <a href="/myapp/${cinema.url}">${cinema.cinema}</a>
                                     </h4>
-                                    <h5>${cinema.fields.city}</h5>
-                                    <p class="card-text">${cinema.fields.address}</p>
+                                    <h5>${cinema.city}</h5>
+                                    <p class="card-text">${cinema.address}</p>
                                 </div>
                             </div>
                         </div>
                     `);
-                    
                 });
             },
             error: () => {
                 alert("Ошибочка")
             }
-
         })
 
         // $.ajax({
