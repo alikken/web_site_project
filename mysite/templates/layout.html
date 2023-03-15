@@ -6,12 +6,9 @@
 
 
 
-<header class="p-3 text-bg-dark">
-    <div class="container">
+<header class="p-3 text-bg-dark fixed-?">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        {% comment %} <a href="{% url 'index' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none ">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a> {% endcomment %}
+
         <h3>
             <a class="navbar-brand" href="{% url 'index' %}">Apple Cinema</a>
         </h3>
@@ -23,17 +20,16 @@
 
         <div class="text-end">
           {% if user.is_authenticated %}
-            <p>Вы вошли в систему как {{ user.username }}.</p>
-            <a type="button" href='{% url 'logout' %}' class="btn btn-outline-light me-2">Выйти</a>
+            
+            <a type="button" href='{% url 'logout' %}' class="btn btn-outline-light me-2">{{ user.username }}|Выйти</a>
           {% else %}
-            <p>Вы не вошли в систему.</p>
+            
             <a type="button" href='{% url 'login' %}' class="btn btn-outline-light me-2">Войти</a>
           {% endif %}
           
 
         </div>
       </div>
-    </div>
 </header>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>

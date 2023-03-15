@@ -12,10 +12,6 @@
           <h1 class="fw-bold mb-0 fs-2">Войти в аккаунт</h1>
         </div>
 
-        {% comment %} {% for theatre in theatres %}
-          <img src='/myapp{{theatre.image.url}}'>
-        {% endfor %} {% endcomment %}
-
         <div class="modal-body p-5 pt-0">
           <form class="" action="{% url 'login' %}" method="POST">
             {% csrf_token %}
@@ -26,17 +22,6 @@
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Войти</button>
             <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
             <hr class="my-4">
-
-            <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#Google"></use></svg>
-              Sign up with Google
-            </button>
-
-            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#GitHub"></use></svg>
-              Sign up with GitHub
-            </button>
 
             <p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p>
 
