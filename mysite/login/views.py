@@ -38,3 +38,6 @@ class CustomLogout(LogoutView):
     template_name = 'myapp/index.html'
     def get_success_url(self):
         return resolve_url('index')
+    
+
+    

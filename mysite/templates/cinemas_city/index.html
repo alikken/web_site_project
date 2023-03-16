@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% load account socialaccount %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h3>{% user_display user %} <a href="/accounts/logout/">Logout</a></h3>
+{% else %}
+    <h3><a href="{% provider_login_url "google" %}"?next={{request.get_full_path}}>Login in Google</a></h3>
+{% endif %}
+
+{% endblock content %}
+
