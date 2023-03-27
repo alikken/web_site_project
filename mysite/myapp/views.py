@@ -21,6 +21,7 @@ class CityDetailView(View):
     def get(self, request, pk):
         city = CityLocation.objects.get(id=pk)
         cinemas = city.cinema_set.all()
+        print(type(cinemas))
 
         return render(request, 'cinemas_city/city_detail.html', {"city": city, 'cinema_list':cinemas})
 

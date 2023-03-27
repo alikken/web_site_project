@@ -6,32 +6,45 @@
 
 
 
-<header class="p-3 text-bg-dark fixed-?">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
-        <h3>
-            <a class="navbar-brand" href="{% url 'index' %}">Apple Cinema</a>
-        </h3>
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'movies' %}" class="nav-link px-2 text-secondary">Новости</a></li>
-          <li><a href="" class="nav-link px-2 text-white">Поиск</a></li>
-          <li><a href="{% url 'cinema' %}" class="nav-link px-2 text-white">Кинотеатры</a></li>
-        </ul>
 
-        <div class="text-end">
-          {% if user.is_authenticated %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">CINEMA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'index' %}">Новости</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cinema' %}">Кинотеатры</a>
+        </li>
+      </ul>
+        <div class="navbar-nav ml-auto">
+          <div class="nav-item">
+            {% if not user.is_authenticated %}
             
-            <a type="button" href='{% url 'logout' %}' class="btn btn-outline-light me-2">{{ user.username }}|Выйти</a>
-          {% else %}
-            
-            <a type="button" href='{% url 'login' %}' class="btn btn-outline-light me-2">Войти</a>
-          {% endif %}
-          
-
+            <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+            {% else %}
+            <a href="{% url 'logout' %}" class="nav-item nav-link">{{ user.username }}</a>
+            {% endif %}
+          </div>			
         </div>
-      </div>
-</header>
+    </div>
+  </div>
+</nav>
+
+
+
+<body>
 
 {% block content %}
-{% endblock content %}
+
+{% endblock content %} 
+</body>
+
 

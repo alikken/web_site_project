@@ -1,7 +1,7 @@
 $(document).ready(() => {
     $("[id^='cinema']").click((event) => {
         var cityID = event.target.attributes['data-city-id'].value;
-
+ 
         $.ajax({
             url: `http://localhost:8000/myapp/get_theatre_by_city_id?city_id=${cityID}`,
             method: 'GET',
@@ -13,14 +13,10 @@ $(document).ready(() => {
             success: (response) => {
               
                 console.log(response)
-                
-                
-                
 
-                
                 $("#result").html('');
                 response.forEach(cinema=> {
-                    
+                   
                     $("#result").append(`
                         <div style="float: left;">
                             <div class="card" style="width: 18rem;>

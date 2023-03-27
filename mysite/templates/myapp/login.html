@@ -1,34 +1,39 @@
 {% extends 'layout.html' %}
+    {% load widget_tweaks %}
 
-
-
-{% load widget_tweaks %} 
 
 {% block content %}
-<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0">
-          <h1 class="fw-bold mb-0 fs-2">Войти в аккаунт</h1>
+
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-white">
+                <div class="card-body p-5">
+                    <form class="mb-3 mt-md-4" method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <h2 class="fw-bold mb-2 text-uppercase ">Cinema</h2>
+                        <p class=" mb-5">Пожалуйста ведите логин и пароль</p>
+                        
+                        {%for field in form%}
+                        <div class="mb-3">
+                            <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>
+                        </div>
+                        {% endfor %}
+
+                        <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p>
+                        <div class="d-grid">
+                            <button class="btn btn-outline-dark" type="submit">Login</button>
+                        </div>
+                    </form>
+                    <div>
+                    <p class="mb-0  text-center">нет учетной записи? <a href="{% url 'register' %}" class="text-primary fw-bold">зарегистрироваться</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="modal-body p-5 pt-0">
-          <form class="" action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            {%for field in form%}
-            <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>
-            {% endfor %}
-
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Войти</button>
-            <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-            <hr class="my-4">
-
-            <p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p>
-            
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 {% endblock content %}

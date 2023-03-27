@@ -118,4 +118,18 @@ class Rating(models.Model):
         verbose_name = "Рейтинг"
         verbose_name_plural = "Рейтинги"
 
-# class Reviews(models.Model): дописать
+class Review(models.Model): 
+    """Отзывы"""
+    name = models.CharField("Имя", max_length=100)
+    title = models.CharField("Заголовок", max_length=100)
+    description = models.TextField("Описание", max_length=5000)
+
+    movie = models.ForeignKey(Movie, verbose_name="фильм", on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.name} - {self.title}"
+    
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        

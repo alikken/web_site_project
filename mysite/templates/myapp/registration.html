@@ -1,47 +1,34 @@
-{%extends 'layout.html'%}
+{% extends 'layout.html' %}
 {% load widget_tweaks %}
+
 
 {% block content %}
 
-<div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header p-5 pb-4 border-bottom-0">
-          <h1 class="fw-bold mb-0 fs-2">Регистрация</h1>
-        </div>
-
-        <div class="modal-body p-5 pt-0">
-          <form action="" method="POST">
-            {% csrf_token %}
-            <div class="container">
-                {% for field in form %}
-                <div>
-                    <p>{{field.label}}: <br> {{field|attr:"class: form-control"}}</p>
-                    {% for error in field.errors %}
-                        <small style="color: red">{{error}}</small>
-                        
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-white">
+              <div class="card-body p-5">
+                  <form class="mb-3 mt-md-4" method="POST">
+                    {% csrf_token %}
+                    <h2 class="fw-bold mb-2 text-uppercase ">Cinema</h2>
+                    <p class=" mb-5">Пожалуйста ведите логин и пароль</p>
+                    {%for field in form%}
+                      <div class="mb-3">
+                        <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>
+                      </div>
                     {% endfor %}
-                </div>
-                {% endfor %}
-            </div> 
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Зарегистрироваться</button>
-            <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-            <hr class="my-4">
-            
-            <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
-              Sign up with Google
               
-            </button>
-
-            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#GitHub"></use></svg>
-              Sign up with GitHub
-            </button>
-          </form>
+                    <div class="d-grid">
+                        <button class="btn btn-outline-dark" type="submit">Sign in</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+</div>
 
-{%endblock%}
+{% endblock content %}
