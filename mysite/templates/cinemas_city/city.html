@@ -11,6 +11,7 @@
               {% csrf_token %}
               {% for a in city_list %}
                 <li><a class="dropdown-item " data-city-id="{{ a.id }}" id="cinema{{ a.id }}" href="#">{{ a.name }}</a></li>
+                
               {% endfor %}
           </ul>
         </div>
@@ -21,25 +22,11 @@
         <div style="overflow: hidden;">
           <div style="width: 1000%;">
             <div id='result'>
-              {% comment %} {% for a in cinema %}
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="#">
-                            
-                            <img class="card-img-top"
-                                src="/myapp{{a.image.url}}"
-                                alt="">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="/myapp/{{a.url}}">{{a.cinema}}</a>
-                            </h4>
-                            <h5>{{a.city}}</h5>
-                            <p class="card-text">{{a.address}}</p>
-                        </div>
-                    </div>
-                </div>
-              {% endfor %} {% endcomment %}
+              
+              
+                
+              
+                
             </div>
           </div>
         </div>

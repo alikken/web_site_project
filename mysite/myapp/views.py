@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Cinema, CityLocation
 from django.views.generic import View
 from django.http.request import HttpRequest
-from django.http import JsonResponse
 from .serializers import CinemaSerializer
 from rest_framework import generics
 
@@ -21,9 +20,10 @@ class CityDetailView(View):
     def get(self, request, pk):
         city = CityLocation.objects.get(id=pk)
         cinemas = city.cinema_set.all()
+
         print(type(cinemas))
 
-        return render(request, 'cinemas_city/city_detail.html', {"city": city, 'cinema_list':cinemas})
+        return render(request, 'cinemas_city/city_detail.html', {"city": city, 'cinema_list': cinemas})
 
 
 class CinemaDetailView(View):

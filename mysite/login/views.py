@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import authenticate
 from .forms import UserRegistrationForm
 from django.contrib import messages
-from django.contrib.auth.models import User
+
 
 
 def register(request):
