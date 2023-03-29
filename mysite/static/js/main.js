@@ -18,22 +18,26 @@ $(document).ready(() => {
                 response.forEach(cinema=> {
                    
                     $("#result").append(`
-                        <div style="float: left;">
-                            <div class="card" style="width: 18rem;>
-                                <a href="#">
-                                    <img class="img-top-fluid"
-                                        src="${cinema.image}"
-                                        alt="">
-                                </a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a href="/myapp/${cinema.url}">${cinema.cinema}</a>
-                                    </h4>
-                                    <h5>${cinema.city}</h5>
-                                    <p class="card-text">${cinema.address}</p>
+
+                        <a href="/myapp/${cinema.url}" class="text-decoration-none text-black cinema-card">
+                            <div class="container-sm">
+                                <div class="card border border-0" style="width: 32rem; height: 7rem;">
+                                    <div class="card-body" >
+                                        <div class="row row-cols-auto">
+                                            <div class="col">
+                                                <img class="img-cinema card-img rounded" src="${cinema.image}" alt="">
+                                            </div>
+                                            <div class="col">
+                                                <p class="fw-medium">${cinema.cinema}|${cinema.city}</p>
+                                                <p>${cinema.address}</p>
+                                            </div>
+                                        </div>  
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+
+
                     `);
                 });
             },

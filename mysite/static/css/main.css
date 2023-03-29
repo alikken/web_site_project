@@ -1,13 +1,30 @@
-body{
-    
+/* body{
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+    url(https://newsib.net/wp-content/uploads/2022/11/1619602660_3-phonoteka_org-p-kinematograf-fon-3.jpg);
+    background-position: center;
+    background-size: cover;
+} */
+
+.container{
+    padding-top: 75px;
 }
 
-.header{
-    position: absolute;
+
+
+.img-cinema{
+    width: 75px;
+    height: 75px;
 }
 
 
-.img{
-    height: 10px;
-    width: 1000px;
+
+.cinema-card{
+    padding: 1px;
 }
+
+
+body {
+    background: #F9F8FD;
+    font-family: 'Lexend Exa', sans-serif;
+  }
+  
