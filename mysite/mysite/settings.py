@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     
     'widget_tweaks',
+    'multiupload',
     
     'django_filters',
     'rest_framework',
@@ -54,9 +55,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-
     'myapp',
-    'movies',
     'login',
 ]
 

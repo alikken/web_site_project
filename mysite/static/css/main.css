@@ -9,12 +9,34 @@
     padding-top: 75px;
 }
 
-
+.carusel{
+    padding: 25px;
+}
 
 .img-cinema{
     width: 75px;
     height: 75px;
 }
+
+ion-icon {
+    font-size: 40px;
+    color: orange;
+  }
+
+/* Кнопки карусели */
+.owl-prev {
+    position: absolute;
+    top: 50%;
+    left: -50px; /* отступ от левого края */
+    transform: translateY(-50%);
+  }
+  
+  .owl-next {
+    position: absolute;
+    top: 50%;
+    right: -50px; /* отступ от правого края */
+    transform: translateY(-50%);
+  }
 
 
 
@@ -22,9 +44,61 @@
     padding: 1px;
 }
 
-
-body {
+/* body {
     background: #F9F8FD;
     font-family: 'Lexend Exa', sans-serif;
   }
-  
+   */
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    height: 70px;
+    width: 100vw;
+    background: #262626;  /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to bottom, #262626, #2b2b2b);  
+    background: linear-gradient(to bottom, #262626, #2b2b2b);   */
+}
+
+.header__controller {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* font-family: "Garamond", Times, serif; */
+}
+
+#nav1:hover{
+    background: #a80d0d;
+}
+
+#nav1:active{
+    background: #f0eded;
+}
+
+.user_info{
+    height: 120px !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navs {
+    display: flex;
+    gap: 45px;
+    align-items: center;
+    color: white;
+}
+
+.link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+

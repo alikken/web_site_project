@@ -1,49 +1,34 @@
 <html lang="en">
 <head>
-  {% comment %} my link {% endcomment %}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />
-
- 
-  {% comment %} order link {% endcomment %}
-
-
-
+  <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />    
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">CINEMA</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'index' %}">Новости</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'cinema' %}">Кинотеатры</a>
-          </li>
-        </ul>
-          <div class="navbar-nav ml-auto">
-            <div class="nav-item">
+<header class="header">
+    <div class="header__controller">
+      <span class="iconify" data-icon="fa-solid:couch" data-flip="horizontal" 
+          style="font-size:56px;" color="white"></span>
+      <div class="user_info">
+          <div class="navs">
+              <a class="nav-link" id="nav1" aria-current="page" href="{% url 'home' %}">Новости</a>
+              {% comment %} <a class="nav-link" id="nav1" href="{% url 'city' %}">Кинотеатры</a> {% endcomment %}
               {% if not user.is_authenticated %}
-              
-              <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                <a href="{% url 'login' %}" id="nav1" class="nav-item nav-link">Login</a>
               {% else %}
-              <a href="{% url 'logout' %}" class="nav-item nav-link">{{ user.username }}</a>
+                <a href="{% url 'logout' %}" id="nav1" class="nav-item nav-link">{{ user.username }}</a>
               {% endif %}
-            </div>			
           </div>
-      </div>
+      </div>  
     </div>
-  </nav>
+  </header> 
 
-  {% comment %} script {% endcomment %}
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  
+
+
+
   <div class="container">
   {% block content %}
   {% endblock content %} 

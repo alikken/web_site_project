@@ -19,7 +19,7 @@ $(document).ready(() => {
                    
                     $("#result").append(`
 
-                        <a href="/myapp/${cinema.url}" class="text-decoration-none text-black cinema-card">
+                        <a href="/myapp/${cinema.url}" class="text-decoration-none text-black ">
                             <div class="container-sm">
                                 <div class="card border border-0" style="width: 32rem; height: 7rem;">
                                     <div class="card-body" >
@@ -46,14 +46,7 @@ $(document).ready(() => {
             }
         })
 
-        // $.ajax({
-        //     method: 'GET',
-        //     url: `http://localhost:8000/myapp/get_theatre_by_city_id?city_id=${cityID}`,
-        //     contentType: 'application/json',
-        //     success: function(result){
-        //         $('#result').html(result);
-        //     }
-        // })
+
 
     });
 })

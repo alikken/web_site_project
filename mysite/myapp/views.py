@@ -6,32 +6,21 @@ from .serializers import CinemaSerializer
 from rest_framework import generics
 
 
-def index(request: HttpRequest) -> HttpRequest:
-    """index view."""
-    return render(request, template_name='cinemas_city/index.html')
 
-class CityView(View):
+class HomePage(View):
+
     def get(self, request):
-        citys = CityLocation.objects.all()
-        
-        return render(request, 'cinemas_city/city.html', {"city_list": citys})
+        cities = CityLocation.objects.all()
+        cinema_list = Cinema.objects.all()
+        context_dict = {"city_list": cities, "cinema_list": cinema_list,}
 
-class CityDetailView(View):
-    def get(self, request, pk):
-        city = CityLocation.objects.get(id=pk)
-        cinemas = city.cinema_set.all()
-
-        print(type(cinemas))
-
-        return render(request, 'cinemas_city/city_detail.html', {"city": city, 'cinema_list': cinemas})
-
+        return render(request, 'cinema_city/index.html', context_dict)
 
 class CinemaDetailView(View):
     def get(self, request, slug):
         cinema = Cinema.objects.get(url=slug)
 
-        return render(request, 'cinemas_city/cinema_detail.html', {"cinema": cinema})
-
+        return render(request, 'cinema_city/cinema_detail.html', {"cinema": cinema})
 
 class CinemasListView(generics.ListAPIView):
     serializer_class = CinemaSerializer

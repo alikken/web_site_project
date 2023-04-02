@@ -18,7 +18,7 @@ def register(request):
             user = authenticate(username = user.username, password = password)
         
             messages.success(request, 'Вы успешно зарегистрировались!')
-            return redirect('index')
+            return redirect('home')
     else:
         form = UserRegistrationForm()
 
@@ -33,11 +33,13 @@ def register(request):
 class CustomLogin(LoginView):
     template_name = 'myapp/login.html'
     def get_success_url(self):
-        return resolve_url('index')
+        return resolve_url('home')
 
 class CustomLogout(LogoutView):
-    template_name = 'myapp/index.html'
+    template_name = 'myapp/home.html'
     def get_success_url(self):
-        return resolve_url('index')
+        return resolve_url('home')
+    
+
     
 

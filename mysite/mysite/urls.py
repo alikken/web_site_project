@@ -24,13 +24,12 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/', include('myapp.urls')),
-    path('', include('movies.urls')),
     path('', include('login.urls')),
     
-
+    #Токен
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
-
+    #Переход в аккаунт соц сетей
     path('accounts/', include('allauth.urls')),
 ]

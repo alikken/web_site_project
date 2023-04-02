@@ -10,12 +10,10 @@ from .views import CinemasListView
 
 
 urlpatterns = [
-    path('index/', views.index, name='index'),
-
-    path('city/', views.CityView.as_view(), name='cinema'),
-    path('<int:pk>/', views.CityDetailView.as_view()),
+    path('home/', views.HomePage.as_view(), name='home'),
+    # path('home/', views.CityView.as_view(), name='city'),
+    # path('<int:pk>/', views.CityDetailView.as_view()),
     path('<slug:slug>/', views.CinemaDetailView.as_view()),
-    #urls for jwt auth
     path('get_theatre_by_city_id', views.CinemasListView.as_view(), name='get_theatre_by_city_id'),
 ]
 
