@@ -3,7 +3,7 @@ $(document).ready(() => {
         var cityID = event.target.attributes['data-city-id'].value;
  
         $.ajax({
-            url: `http://localhost:8000/myapp/get_theatre_by_city_id?city_id=${cityID}`,
+            url: `http://192.168.1.6:8000/get_theatre_by_city_id?city_id=${cityID}`,
             method: 'GET',
             headers: {
                 "x-csrf-token": $("input[name='csrfmiddlewaretoken']").val(),
@@ -19,7 +19,7 @@ $(document).ready(() => {
                    
                     $("#result").append(`
 
-                        <a href="/myapp/${cinema.url}" class="text-decoration-none text-black ">
+                        <a href="/${cinema.url}" class="text-decoration-none text-black ">
                             <div class="container-sm">
                                 <div class="card border border-0" style="width: 32rem; height: 7rem;">
                                     <div class="card-body" >

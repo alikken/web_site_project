@@ -15,15 +15,13 @@ class CityLocation(models.Model):
 class Cinema(models.Model):
     """Модель Кинотеатр"""
 
-    cinema = models.CharField('Кинотеатр', max_length=128)
+    cinema = models.CharField('Название Кинотеатра', max_length=128)
     address = models.CharField('Адрес', max_length=128)
     city = models.ForeignKey(verbose_name='Город', to=CityLocation, on_delete=models.CASCADE)
-
     image = models.ImageField(verbose_name='Превью', upload_to='media')
     image_detail = models.ImageField(verbose_name='Фото кинотеатра', upload_to='media')
     info = models.TextField('Информация', max_length=5000)
-    # images = MultiFileField( max_num=5)
-
+   
     url = models.SlugField(max_length=160, unique=True)
 
     class Meta:

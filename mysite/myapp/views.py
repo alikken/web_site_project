@@ -32,3 +32,5 @@ class CinemasListView(generics.ListAPIView):
         return queryset
     
 
+
+
