@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/controllers/home_controller.dart';
+import 'package:mobileapp/models/cinema.dart';
 import 'package:mobileapp/storage/storage.dart';
 
-import 'MainDrawer.dart';
 import 'auth/login.dart';
 
 void main() {
@@ -23,13 +24,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {  
+// class HomePage extends StatefulWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> {
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//               appBar: AppBar(
+//           backgroundColor: Colors.lightBlue,
+//           title: const Text('Кинотеатры'),
+//               ),
+//     );
+//   }
+// }
+
+class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final SecureStorage storage = SecureStorage();
   String? _username = "";
 
@@ -41,8 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (username == null) {
           button_text = 'Вход';
           hello_text = 'Вы вышли';
-        }
-        else {
+        } else {
           _username = username.toString();
           hello_text = 'Добро пожаловать ${_username}';
           button_text = 'Выход';
@@ -62,37 +81,90 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        title: const Text('ЖКХ услуги'),
-        actions: <Widget>[
-          TextButton(
-              onPressed: () {
-                if (button_text == 'Выход') {
-                  storage.deleteData();
-                  setState(() {
-                    hello_text = 'Вы вышли';
-                    button_text = 'Вход';
-                  });
-                }
-                else {
-                  Navigator.push(
+        appBar: AppBar(
+          backgroundColor: Colors.lightBlue,
+          title: const Text('Кинотеатр'),
+          actions: <Widget>[
+            TextButton(
+                onPressed: () {
+                  if (button_text == 'Выход') {
+                    storage.deleteData();
+                    setState(() {
+                      hello_text = 'Вы вышли';
+                      button_text = 'Вход';
+                    });
+                  } else {
+                    Navigator.push(
                         context, MaterialPageRoute(builder: (_) => Login()));
-                }
-              },
-              child: Text(button_text))
-        ],
+                  }
+                },
+                child: Text(button_text))
+          ],
+        ),
+        // drawer: Drawer(
+        //   child: Scaffold(
+
+        //   ),
+        // ),
+        body: Center(
+          child: TextButton(
+            child: Text('страница'),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TheaterPage()));
+            },
+          ),
+        ));
+  }
+}
+
+class TheaterPage extends StatefulWidget {
+  final HomeController _homeController = HomeController();
+  @override
+  _TheaterPageState createState() => _TheaterPageState();
+}
+
+class _TheaterPageState extends State<TheaterPage> {
+  List<Theater> _listTheater = [];
+
+  @override
+  void initState() {
+    super.initState();
+    widget._homeController.getTheater().then((listTheater) {
+      setState(() {
+        _listTheater = listTheater;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: _listTheater.length,
+        itemBuilder: (context, index) {
+          final itemTheater = _listTheater[_listTheater.length - index - 1];
+          print('fsdfsdfsdfsdfsdfsdfsfsdfsdfsdfsdfs ${_listTheater}');
+          return Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
+            color: Colors.cyan[100],
+            child: Column(children: [
+              Text(
+                itemTheater.cinema,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              ),
+              Text(
+                itemTheater.address,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 4,
+                textAlign: TextAlign.left,
+              ),
+            ]),
+          );
+        },
       ),
-      drawer: Drawer(
-        child: MainDrawer(),
-      ),
-      body: 
-         Center(
-            child: 
-                Text(hello_text), // ${widget.username}
-          )
     );
   }
 }

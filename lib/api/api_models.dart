@@ -10,21 +10,6 @@ class UserLogin {
       {"username": this.username, "password": this.password};
 }
 
-class UserRegister {
-  String email;
-  String username;
-  String password;
-
-  UserRegister(
-      {required this.email, required this.username, required this.password});
-
-  Map<String, dynamic> toDatabaseJson() => {
-        "email": this.email,
-        "username": this.username,
-        "password": this.password
-      };
-}
-
 class Token {
   String token;
   String refreshToken;
@@ -39,7 +24,28 @@ class Token {
 
   Map<String, dynamic> fetchUser(String token) {
     Map<String, dynamic> userCreds = JwtDecoder.decode(token);
-    print('APIMODELSSSSS ${userCreds}');
+
     return userCreds;
   }
+}
+
+class UserRegistration {
+  String username;
+  String email;
+  String password1;
+  String password2;
+
+  UserRegistration({
+    required this.username,
+    required this.email,
+    required this.password1,
+    required this.password2,
+  });
+
+  Map<String, dynamic> toDatabaseJson() => {
+        "username": username,
+        "email": email,
+        "password1": password1,
+        "password2": password2,
+      };
 }

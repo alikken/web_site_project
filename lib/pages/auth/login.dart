@@ -2,33 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mobileapp/pages/main.dart';
 
 import '../../controllers/home_controller.dart';
-
-class UserData {
-  String username;
-  String password;
-
-  UserData({required this.username, required this.password});
-
-  Map<String, dynamic> toJson() => {
-        'username': username,
-        'password': password,
-      };
-}
-
-class Token {
-  String token;
-
-  Token({required this.token});
-
-  factory Token.fromJson(Map<String, dynamic> json) {
-    return Token(token: json['token']);
-  }
-}
+import 'registration.dart';
 
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
-  
+
   final HomeController _homeController = HomeController();
 }
 
@@ -58,7 +37,6 @@ class _LoginState extends State<Login> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15),
               margin: const EdgeInsets.only(top: 70.0),
-
               child: TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
@@ -69,8 +47,7 @@ class _LoginState extends State<Login> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0
-                  ),
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
               child: TextFormField(
                 controller: passwordController,
                 obscureText: true,
@@ -92,16 +69,21 @@ class _LoginState extends State<Login> {
                   String password = passwordController.text;
                   await widget._homeController.loginUser(username, password);
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MyApp()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyApp()));
                 },
                 child: Text(
                   'Вход',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Registration()));
+              },
+              child: Text('Зарегистрироваться'),
             ),
           ],
         ),
