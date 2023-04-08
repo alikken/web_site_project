@@ -26,17 +26,17 @@ def register(request):
 
     return render(
         request, 
-        'myapp/registration.html', 
+        'auth/registration.html', 
         context=context
         )
 
 class CustomLogin(LoginView):
-    template_name = 'myapp/login.html'
+    template_name = 'auth/login.html'
     def get_success_url(self):
         return resolve_url('home')
 
 class CustomLogout(LogoutView):
-    template_name = 'myapp/home.html'
+    template_name = 'auth/home.html'
     def get_success_url(self):
         return resolve_url('home')
     

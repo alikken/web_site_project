@@ -8,3 +8,5 @@ class CinemaSerializer(serializers.ModelSerializer):
         model = models.Cinema
         fields = '__all__'
         
+
+# class CitySerializer(serializers.ModelSerializer):

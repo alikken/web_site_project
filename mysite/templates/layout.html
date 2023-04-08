@@ -10,8 +10,8 @@
           style="font-size:56px;" color="white"></span>
       <div class="user_info">
           <div class="navs">
-              <a class="nav-link" id="nav1" aria-current="page" href="{% url 'home' %}">Новости</a>
-              {% comment %} <a class="nav-link" id="nav1" href="{% url 'city' %}">Кинотеатры</a> {% endcomment %}
+              {% comment %} <a class="nav-link" id="nav1" aria-current="page" href="{% url 'home' %}">Новости</a> {% endcomment %}
+              
               {% if not user.is_authenticated %}
                 <a href="{% url 'login' %}" id="nav1" class="nav-item nav-link">Login</a>
               {% else %}

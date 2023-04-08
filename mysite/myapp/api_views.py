@@ -21,3 +21,7 @@ class CinemaList(ListAPIView):
     queryset = Cinema.objects.all()
     print(queryset)
     # permission_classes = [IsAuthenticated]
+
+
+# class CityList(ListAPIView):
+#     serializer_class = 

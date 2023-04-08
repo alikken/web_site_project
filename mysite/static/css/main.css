@@ -5,6 +5,11 @@
     background-size: cover;
 } */
 
+#title_movie{
+    width: 150px;
+    height: 150px;
+}
+
 .container{
     padding-top: 75px;
 }

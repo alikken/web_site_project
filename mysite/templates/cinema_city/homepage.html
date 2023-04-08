@@ -23,7 +23,7 @@
         {% for cinema in cinema_list %}
         <div class="row">
           <div class="col-sm-3">
-              <a href="#" class="text-decoration-none text-black ">
+              <a href="/{{cinema.url}}" class="text-decoration-none text-black ">
                 <div class="container-sm">
                     <div class="card border border-0" style="width: 32rem; height: 7rem;">
                         <div class="card-body" >
@@ -50,6 +50,8 @@
 
 <div class="container carusel">
   <div class="owl-carousel owl-theme">
+    {% for f in movie_title %}
+    <div class="item"><a href="/{{f.url}}"><img src="/media/{{f.detail_img}}" id="title_movie" class="card-img-top" alt="..."></a></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
@@ -61,10 +63,18 @@
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
+    {% endfor %}
   </div>
 </div>
 
+
+<div class="container">
+  {% for f in movie_title %}
+  <p>{{f.title}}</p>
+  <a href="/movie/{{f.url}}">{{f.title}}</a>
+  <img src="/media/{{f.detail_img}}" id="title_movie" alt="">
+  {% endfor %}
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>

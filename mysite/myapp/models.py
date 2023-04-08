@@ -3,7 +3,7 @@ from multiupload.fields import MultiFileField
 
 class CityLocation(models.Model):
     name = models.CharField('Город', max_length=128, unique=True)
-    url = models.SlugField(max_length=160, unique=True)
+    # url = models.SlugField(max_length=160, unique=True)
 
     class Meta:
         verbose_name = "Город"
@@ -27,49 +27,46 @@ class Cinema(models.Model):
     class Meta:
         verbose_name = "Кинотеатр"
         verbose_name_plural = "Кинотеатры"
-
     def __str__(self) -> str:
         return self.cinema
 
 """Модели фильм"""
 
 class Production(models.Model):
-    country = models.CharField('Страна', max_length=128)
+    country = models.CharField('Производство', max_length=128)
     class Meta:
-        verbose_name = "Страна"
-        verbose_name_plural = "Страны"
-
+        verbose_name = "Производство"
+        verbose_name_plural = "Производствы"
     def __str__(self) -> str:
         return self.country
     
 class Genre(models.Model):
     title = models.CharField("Жанр", max_length=128)
-
     class Meta:
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
-
     def __str__(self) -> str:
         return self.title
     
 class Regisseur(models.Model):
     name = models.CharField('Имя', max_length=200)
     image = models.ImageField(verbose_name='фото', upload_to='mdeia', blank=True)
-
     class Meta:
         verbose_name = "Актер|Режиссер"
         verbose_name_plural = "Актеры|Режиссеры"
-
     def __str__(self) -> str:
         return self.name
 
 class Movie(models.Model):
     title = models.CharField('Название', max_length=128)
+    title_img = models.ImageField(upload_to='media')
+    detail_img = models.ImageField(upload_to='media')
     genre = models.ManyToManyField(Genre, verbose_name='Жанр')
     production = models.ManyToManyField(Production, verbose_name='Производство')
     premiere = models.DateTimeField("премьера", auto_now=False, auto_now_add=False)
     duration = models.IntegerField(null=True)
-    
+    #url
+    url = models.SlugField(max_length=160, unique=True)
     regisseur = models.ManyToManyField(Regisseur, verbose_name='Режиссер')
 
     class Meta:
