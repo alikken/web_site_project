@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+
+
+    <h1>My Tickets</h1>
+    <ul>
+        {% for ticket in tickets %}
+            <li>Ticket ID: {{ ticket.id }}, Seat Number: {{ ticket.seat_number }}, Date: {{ ticket.date }}, Price: {{ ticket.price }}</li>
+        {% empty %}
+            <li>You have no tickets.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

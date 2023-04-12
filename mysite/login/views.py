@@ -4,8 +4,6 @@ from django.contrib.auth import authenticate
 from .forms import UserRegistrationForm
 from django.contrib import messages
 
-
-
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)

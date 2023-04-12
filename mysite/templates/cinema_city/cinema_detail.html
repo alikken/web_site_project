@@ -5,5 +5,13 @@
 <h3>Кинотеатр - {{cinema.cinema}}</h3>
 <h3>URL: {{cinema.url}}</h3>
 <h3>{{cinema.city}}</h3>
-
+{% for hall in halls %}
+    <li><a href="/halls/{{hall.id}}/">{{ hall.name }}</a></li>
+    <p>{{hall.id}}</p>
+    <ul>
+        {% for show_movie in hall.show_movie.all %}
+            <li>{{ show_movie.movie_show.title }} at {{ show_movie.time_show|time:"H:i" }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
 {% endblock content %}

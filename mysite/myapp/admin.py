@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Cinema, CityLocation, Movie, Regisseur, Production, Genre, Show
+from .models import (Cinema, 
+    CityLocation, 
+    Movie, 
+    Hall, 
+    Ticket,
+    Genre,
+    ShowMovie,
+    Seat
+    )
 
 # Register your models here.
 
@@ -7,14 +15,11 @@ from .models import Cinema, CityLocation, Movie, Regisseur, Production, Genre, S
 admin.site.register(Cinema)
 admin.site.register(CityLocation)
 admin.site.register(Movie)
-admin.site.register(Regisseur)
-admin.site.register(Production)
+admin.site.register(Hall)
+admin.site.register(Ticket)
 admin.site.register(Genre)
-admin.site.register(Show)
-
-
-
-
+admin.site.register(ShowMovie)
+admin.site.register(Seat)
 
 
 

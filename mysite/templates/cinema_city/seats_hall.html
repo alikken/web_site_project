@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="row">
+  {% for seat in row %}
+    {% comment %} <div class="seat">{{ seat.0 }}-{{ seat.1 }}</div> {% endcomment %}
+    <div></div>
+    {{seat}}
+    
+  {% endfor %}
+</div>
+{% comment %} <ul>
+  {% for row in seats %}
+    <li>
+      <ul>
+      {% for seat in row %}
+        <li>{{ seat }}</li>
+      {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+  </ul> {% endcomment %}
+  <form action="" method="POST">
+    {% comment %} {% csrf_token %}
+    <ul class="seat-list">
+      {% for row in seats %}
+        {% for seat in row %}
+          <li class="seat-item">
+            <label for="seat_{{ seat.0 }}_{{ seat.1 }}">
+            <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
+            {{ seat.0 }}|{{ seat.1 }}
+            </label>
+            
+              
+              
+            
+            
+          </li>
+        {% endfor %}
+      {% endfor %}
+      </ul> {% endcomment %}
+      {% csrf_token %}
+      <ul class="seat-list">
+        {% for row in seats %}
+          {% for seat in row %}
+            {% if forloop.first %}
+              <li class="seat-item new-row">
+                <span class="row-number">Ряд {{ seat.0 }}</span>
+              </li>
+            {% endif %}
+            <li class="seat-item">
+              <label for="seat_{{ seat.0 }}_{{ seat.1 }}">
+                <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
+                {{ seat.0 }}|{{ seat.1 }}
+              </label>
+              
+            </li>
+            {% if forloop.last and not forloop.parentloop.last %}
+              </ul><ul class="seat-list">
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </ul>
+
+      <button type="submit">Reserve seat</button>
+  </form>
+
+    
+
+   
+
+
+  <style>
+
+
+
+
+    .seat-list {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .seat-item {
+      width: 50px; /* ширина места */
+      height: 50px; /* высота места */
+      margin: 5px; /* отступ между местами */
+      {% comment %} border: 1px solid #ccc; /* граница места */ {% endcomment %}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+    }
+    
+  
+  </style>
+
+{% endblock content %}
+
