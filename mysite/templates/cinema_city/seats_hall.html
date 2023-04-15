@@ -2,45 +2,7 @@
 
 {% block content %}
 
-
-<div class="row">
-  {% for seat in row %}
-    {% comment %} <div class="seat">{{ seat.0 }}-{{ seat.1 }}</div> {% endcomment %}
-    <div></div>
-    {{seat}}
-    
-  {% endfor %}
-</div>
-{% comment %} <ul>
-  {% for row in seats %}
-    <li>
-      <ul>
-      {% for seat in row %}
-        <li>{{ seat }}</li>
-      {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-  </ul> {% endcomment %}
   <form action="" method="POST">
-    {% comment %} {% csrf_token %}
-    <ul class="seat-list">
-      {% for row in seats %}
-        {% for seat in row %}
-          <li class="seat-item">
-            <label for="seat_{{ seat.0 }}_{{ seat.1 }}">
-            <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
-            {{ seat.0 }}|{{ seat.1 }}
-            </label>
-            
-              
-              
-            
-            
-          </li>
-        {% endfor %}
-      {% endfor %}
-      </ul> {% endcomment %}
       {% csrf_token %}
       <ul class="seat-list">
         {% for row in seats %}
@@ -51,11 +13,12 @@
               </li>
             {% endif %}
             <li class="seat-item">
-              <label for="seat_{{ seat.0 }}_{{ seat.1 }}">
-                <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
-                {{ seat.0 }}|{{ seat.1 }}
-              </label>
-              
+              <div class="checkbox">
+                  <label for="seat_{{ seat.0 }}_{{ seat.1 }}"></label>
+                  <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
+                  {{ seat.0 }}|{{ seat.1 }}
+              </div>
+
             </li>
             {% if forloop.last and not forloop.parentloop.last %}
               </ul><ul class="seat-list">
@@ -67,15 +30,19 @@
       <button type="submit">Reserve seat</button>
   </form>
 
-    
-
-   
-
-
+  
   <style>
+    {% comment %} input[type="checkbox"] {
+      display: none;
+    } {% endcomment %}
 
-
-
+    .checkbox label:before {
+      content: url("https://cdn-icons-png.flaticon.com/32/1683/1683707.png");
+    } 
+    
+    .checkbox input[type="checkbox"]:checked + label:before {
+      content: url("https://cdn-icons-png.flaticon.com/32/1683/1683809.png");
+    }
 
     .seat-list {
       display: flex;
@@ -84,12 +51,11 @@
       padding: 0;
       margin: 0;
     }
-    
+  
     .seat-item {
       width: 50px; /* ширина места */
       height: 50px; /* высота места */
       margin: 5px; /* отступ между местами */
-      {% comment %} border: 1px solid #ccc; /* граница места */ {% endcomment %}
       display: flex;
       justify-content: center;
       align-items: center;

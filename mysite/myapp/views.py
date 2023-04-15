@@ -117,22 +117,5 @@ class TicketList(ListView):
         return queryset.filter(user=self.request.user.customuser )
     
 
-
-    # template_name = "cinema_city/ticket.html"
-    # def get(self, request, ticket_id):
-    #     ticket = Ticket.objects.get(id=ticket_id)
-    #     show_movie = ticket.seat_number.hall.show_movie.first()
-    #     print("FSEDFSEFSEFSEFSEFSEF", ticket)
-    #     print("FSEDFSEFSEFSEFSEFSEF", show_movie)
-    
-
-
-
-
-
-# def check_seat(request):
-#   seat_id = request.POST.get('seat_id')
-#   if seat_id:
-#     return JsonResponse({'status': 'ok'})
-#   else:
-#     return JsonResponse({'status': 'error'})
+class TicketCheck(View):
+    pass 
