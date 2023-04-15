@@ -22,7 +22,8 @@ urlpatterns = [
     # path('hall/<int:hall_id>/select_seat/', views.select_seat, name='select_seat')
     path('halls/<int:hall_id>/', views.BookTickets.as_view()),
     # path('check_seat/', views.check_seat, name='check_seat'),
-    path('ticket/list/', views.TicketList.as_view()),
+    path('tickets/list/', views.TicketList.as_view()),
+    path('ticket/<int:pk>/', views.TicketCheck.as_view(), name='ticket_check'),
 ]
 
 

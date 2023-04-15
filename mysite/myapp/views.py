@@ -4,7 +4,7 @@ from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Cinema, CityLocation, Hall, Movie, Seat, Ticket
 
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView
 from django.http.request import HttpRequest
 from .serializers import CinemaSerializer
 from rest_framework import generics
@@ -46,9 +46,7 @@ class MoviePage(View):
     
 
 class BookTickets(View):
-    
     template_name = "cinema_city/seats_hall.html"
-
 
     def get(self, request, hall_id, *args, **kwargs):
         print('dsfsdfsdfsdfsdfsdfsdfsdf')
@@ -73,7 +71,6 @@ class BookTickets(View):
 
         return render(request, "cinema_city/seats_hall.html", context)
     
-
     def post(self, request, hall_id, *args, **kwargs):
         print('SFSEFSEFSEFSEFSEFSEFSEFSEFSEFS')
         if request.method == 'POST':
@@ -87,12 +84,13 @@ class BookTickets(View):
             
             hall = Hall.objects.get(id=hall_id)
             tickets = []
+            selected_seat = None
+
             for seat_id in seat_ids:
                 l = row, col = seat_id.split()
                 print('fdsfsdfsdfsdfsdfsdfd', int(l[0]))
                 seat = Seat.objects.create(hall = hall,  row = int(l[0]), col = int(l[1]))
-                # seat = Seat.objects.get(id=seat_id)
-
+                
                 ticket = Ticket.objects.create(
                     user=user.customuser,
                     price=1500,  
@@ -100,7 +98,8 @@ class BookTickets(View):
                     date=datetime.now(),
                 )
                 tickets.append(ticket)
-        # return redirect('home', ticket_id=ticket.id)
+                selected_seat = (int(l[0]), int(l[1]))
+        
         return redirect('home')
     
 
@@ -117,5 +116,8 @@ class TicketList(ListView):
         return queryset.filter(user=self.request.user.customuser )
     
 
-class TicketCheck(View):
-    pass 
+class TicketCheck(DetailView):
+    model = Ticket
+    template_name = 'cinema_city/ticketChek.html'
+    context_object_name = 'ticket'
+     

@@ -15,7 +15,7 @@
             <li class="seat-item">
               <div class="checkbox">
                   <label for="seat_{{ seat.0 }}_{{ seat.1 }}"></label>
-                  <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
+                  <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}" > 
                   {{ seat.0 }}|{{ seat.1 }}
               </div>
 
@@ -30,7 +30,10 @@
       <button type="submit">Reserve seat</button>
   </form>
 
+
   
+
+
   <style>
     {% comment %} input[type="checkbox"] {
       display: none;

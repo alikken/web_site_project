@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+
+
+
+<div class="ticketDetail">
+    <div>Movie:&ensp; {{ticket.seat_number.hall.show_movie.all.0.movie_show}}</div>
+    <div>Studio:&nbsp; {{ticket.seat_number.hall}}</div>
+    <div>Time:&emsp; {{ticket.seat_number.hall.show_movie.all.0.time_show}}</div>
+</div>
+
+
+
+<div class="ticketContainer">
+    <div class="ticketContainer">
+        <div class="ticket">
+            <div class="ticketTitle">{{ticket.seat_number.hall.cinema}}</div>
+            <hr>
+            <div class="ticketDetail">
+            <div>Movie:&ensp; {{ticket.seat_number.hall.show_movie.all.0.movie_show}}</div>
+            <div>Studio:&nbsp; {{ticket.seat_number.hall}}</div>
+            <div>Time:&emsp; {{ticket.seat_number.hall.show_movie.first.time_show}}</div>
+            </div>
+
+            <div class="ticketRip">
+            <div class="circleLeft"></div>
+            <div class="ripLine"></div>
+            <div class="circleRight"></div>
+            </div>
+
+            <div class="ticketSubDetail">
+            <div class="code">LO-2314XXX</div>
+            <div class="date"> {{ticket.date}}</div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+
+<style>
+
+    /* Main Ticket Style */
+    .ticketContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #B7B5E4;
+    }
+    .ticket{
+        animation: bouncingCard 0.6s ease-out infinite alternate;
+        background-color: white;
+        color: darkslategray;
+        border-radius: 12px;
+    }
+    
+    /* Ticket Content */
+    .ticketTitle{
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 12px 16px 4px;
+    }
+    hr{
+        width: 90%;
+        border: 1px solid #efefef;
+    }
+    .ticketDetail{
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 4px 16px;
+    }
+    .ticketSubDetail{
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+    .ticketSubDetail .code{
+        margin-right: 24px;
+    }
+    
+    /* Ticket Ripper */
+    .ticketRip{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .circleLeft{
+        width: 12px;
+        height: 24px;
+        background-color: #B7B5E4;
+        border-radius: 0 12px 12px 0;
+    }
+    .ripLine{
+        width: 100%;
+        border-top: 3px solid #B7B5E4;
+        border-top-style: dashed ;
+    }
+    .circleRight{
+        width: 12px;
+        height: 24px;
+        background-color: #B7B5E4;
+        border-radius: 12px 0 0 12px;
+    }
+    
+</style>
+
+{% endblock content %}

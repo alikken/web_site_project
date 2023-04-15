@@ -4,15 +4,19 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
 
     <h1>My Tickets</h1>
     <ul>
         {% for ticket in tickets %}
+            <a href="{% url 'ticket_check' pk=ticket.pk %}">
             <li>Ticket ID: {{ ticket.id }}, Seat Number: {{ ticket.seat_number }}, Date: {{ ticket.date }}, Price: {{ ticket.price }}</li>
+            </a>    
         {% empty %}
             <li>You have no tickets.</li>
         {% endfor %}
     </ul>
 
-    
 {% endblock content %}
