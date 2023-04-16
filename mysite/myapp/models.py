@@ -1,7 +1,7 @@
 from django.db import models
 from multiupload.fields import MultiFileField
 from login.models import CustomUser
-
+from django.db.models import Avg
 
 class CityLocation(models.Model):
     name = models.CharField('Город', max_length=128, unique=True)
@@ -46,12 +46,25 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre, verbose_name='Жанр')
     description = models.TextField(max_length=200, null=True, blank=True)
     url = models.SlugField(max_length=160, unique=True, blank=True, null=True)
+    
+    
+    def average_rating(self) -> float:
+        return Rating.objects.filter(movie=self).aggregate(Avg("rating"))["rating__avg"] or 0
+    
     class Meta:
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
 
     def __str__(self) -> str:
         return self.title
+    
+class Rating(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    rating =  models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return f"{self.movie.title}: {self.rating}"
 
 class ShowMovie(models.Model):
     movie_show = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)

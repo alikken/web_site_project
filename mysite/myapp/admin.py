@@ -6,7 +6,8 @@ from .models import (Cinema,
     Ticket,
     Genre,
     ShowMovie,
-    Seat
+    Seat,
+    Rating,
     )
 
 # Register your models here.
@@ -20,7 +21,7 @@ admin.site.register(Ticket)
 admin.site.register(Genre)
 admin.site.register(ShowMovie)
 admin.site.register(Seat)
-
+admin.site.register(Rating)
 
 
 

@@ -15,7 +15,11 @@ urlpatterns = [
     # path('home/', views.CityView.as_view(), name='city'),
     # path('<int:pk>/', views.CityDetailView.as_view()),
     
-    path('movie/<slug:slug>/', views.MoviePage.as_view()),
+    path('movie/<slug:slug>', views.MoviePage.as_view(), name='moviepage'),
+    # path('movie/<slug:slug>/rate/<int:rating>', views.rate),
+    
+
+
     path('cinema/<slug:slug>/', views.CinemaDetailView.as_view()),
     path('get_theatre_by_city_id', views.CinemasListView.as_view(), name='get_theatre_by_city_id'),
 

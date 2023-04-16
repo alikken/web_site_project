@@ -20,8 +20,6 @@ class CinemaList(ListAPIView):
     serializer_class = CinemaSerializer
     queryset = Cinema.objects.all()
     print(queryset)
-    # permission_classes = [IsAuthenticated]
 
 
-# class CityList(ListAPIView):
-#     serializer_class = 
+

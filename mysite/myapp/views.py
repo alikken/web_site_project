@@ -2,7 +2,7 @@
 from datetime import datetime
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Cinema, CityLocation, Hall, Movie, Seat, Ticket
+from .models import Cinema, CityLocation, Hall, Movie, Rating, Seat, Ticket
 
 from django.views.generic import View, ListView, DetailView
 from django.http.request import HttpRequest
@@ -15,8 +15,9 @@ class HomePage(View):
     def get(self, request):
         cities = CityLocation.objects.all()
         cinema_list = Cinema.objects.all()
-        movie = Movie.objects.all()
-        context_dict = {"city_list": cities, "cinema_list": cinema_list, "movie_title": movie}
+        movies = Movie.objects.all()
+
+        context_dict = {"city_list": cities, "cinema_list": cinema_list, "movie_title": movies}
         return render(request, 'cinema_city/homepage.html', context_dict)
 
 class CinemaDetailView(View):
@@ -42,18 +43,32 @@ class CinemasListView(generics.ListAPIView):
 class MoviePage(View):
     def get(self, request, slug):
         movie = Movie.objects.get(url=slug)
+        print('fsdfsdfsdf', movie)
+        rating = Rating.objects.filter(movie=movie, user=request.user.customuser).first()
+        print('dsfsdfsdfsdfsdfsdf', rating)
+        movie.user_rating = rating.rating if rating else 0
+        
         return render(request, 'cinema_city/moviePage.html', {'moviepage': movie})
     
+# def rate(request, movie_id: int, rating: int):
+#     print('GDRGDRGDRGDRG')
+#     print(movie_id)
+#     print(request.GET)
+#     movie = Movie.objects.get(id=movie_id)
+#     Rating.objects.filter(movie=movie, user=request.user.customuser).delete()
+#     movie.rating_set.create(user=request.user.customuser, rating=rating)
+#     movie_page = MoviePage()
+#     return movie_page.get(request=request, slug=movie.url)
+
+
+
 
 class BookTickets(View):
     template_name = "cinema_city/seats_hall.html"
-
     def get(self, request, hall_id, *args, **kwargs):
-        print('dsfsdfsdfsdfsdfsdfsdfsdf')
-        
+
         hall = Hall.objects.get(id = hall_id)
-        cinema = Hall.cinema
-        print(cinema)
+
         seats = []
 
         for i in range(1, hall.row_count):
@@ -62,13 +77,12 @@ class BookTickets(View):
             for j in range(1, hall.col_count):
                 row.append((i, j))
             seats.append(row)
-        # print(seats)
+
 
         context = {
             'hall': hall,
             'seats': seats,
         }
-
         return render(request, "cinema_city/seats_hall.html", context)
     
     def post(self, request, hall_id, *args, **kwargs):
@@ -84,7 +98,7 @@ class BookTickets(View):
             
             hall = Hall.objects.get(id=hall_id)
             tickets = []
-            
+
             for seat_id in seat_ids:
                 l = row, col = seat_id.split()
                 print('fdsfsdfsdfsdfsdfsdfd', int(l[0]))
@@ -97,8 +111,6 @@ class BookTickets(View):
                     date=datetime.now(),
                 )
                 tickets.append(ticket)
-                
-        
         return redirect('home')
     
 
@@ -114,7 +126,6 @@ class TicketList(ListView):
         print(queryset.filter(user=self.request.user.customuser))
         return queryset.filter(user=self.request.user.customuser )
     
-
 class TicketCheck(DetailView):
     model = Ticket
     template_name = 'cinema_city/ticketChek.html'
