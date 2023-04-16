@@ -16,7 +16,7 @@ urlpatterns = [
     # path('<int:pk>/', views.CityDetailView.as_view()),
     
     path('movie/<slug:slug>', views.MoviePage.as_view(), name='moviepage'),
-    # path('movie/<slug:slug>/rate/<int:rating>', views.rate),
+    path('movie/<int:movie_id>/rate/<int:rating>/', views.rate),
     
 
 

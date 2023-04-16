@@ -50,15 +50,16 @@ class MoviePage(View):
         
         return render(request, 'cinema_city/moviePage.html', {'moviepage': movie})
     
-# def rate(request, movie_id: int, rating: int):
-#     print('GDRGDRGDRGDRG')
-#     print(movie_id)
-#     print(request.GET)
-#     movie = Movie.objects.get(id=movie_id)
-#     Rating.objects.filter(movie=movie, user=request.user.customuser).delete()
-#     movie.rating_set.create(user=request.user.customuser, rating=rating)
-#     movie_page = MoviePage()
-#     return movie_page.get(request=request, slug=movie.url)
+def rate(request, movie_id: int, rating: int):
+    
+    print('GDRGDRGDRGDRG')
+    print(movie_id)
+    print(request.GET)
+    movie = Movie.objects.get(url=movie_id)
+    Rating.objects.filter(movie=movie, user=request.user.customuser).delete()
+    movie.rating_set.create(user=request.user.customuser, rating=rating)
+    movie_page = MoviePage()
+    return movie_page.get(request=request, slug=movie.url)
 
 
 
