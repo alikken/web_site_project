@@ -84,13 +84,12 @@ class BookTickets(View):
             
             hall = Hall.objects.get(id=hall_id)
             tickets = []
-            selected_seat = None
-
+            
             for seat_id in seat_ids:
                 l = row, col = seat_id.split()
                 print('fdsfsdfsdfsdfsdfsdfd', int(l[0]))
                 seat = Seat.objects.create(hall = hall,  row = int(l[0]), col = int(l[1]))
-                
+                print(seat)
                 ticket = Ticket.objects.create(
                     user=user.customuser,
                     price=1500,  
@@ -98,7 +97,7 @@ class BookTickets(View):
                     date=datetime.now(),
                 )
                 tickets.append(ticket)
-                selected_seat = (int(l[0]), int(l[1]))
+                
         
         return redirect('home')
     
