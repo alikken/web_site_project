@@ -2,6 +2,15 @@ from rest_framework import serializers
 # from myapp import models
 from .models import *
 
+class MovieShowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShowMovie
+        fields = '__all__'
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 class CinemaSerializer(serializers.ModelSerializer):
     city = serializers.CharField()
@@ -13,7 +22,7 @@ class CinemaSerializer(serializers.ModelSerializer):
 class HallSerializer(serializers.ModelSerializer):
 
     cinema = serializers.CharField()
-    show_movie = serializers.StringRelatedField(many=True)
+    show_movie = MovieShowSerializer(many=True)
 
     class Meta:
         model = Hall 
@@ -31,16 +40,7 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = '__all__'
 
-class MovieShowSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ShowMovie
-        fields = '__all__'
 
-
-class MovieSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movie
-        fields = '__all__'
 
 # class RatingSerializer(serializers.models):
 

@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, GenericAPIView, ListCreateAPIView
+from rest_framework.generics import ListAPIView, GenericAPIView, ListCreateAPIView, CreateAPIView
 from .serializers import  *
 
 
@@ -13,8 +13,8 @@ from rest_framework import status
 from .models import *
 from rest_framework.permissions import IsAuthenticated
 from .serializers import CinemaSerializer
-
-
+from django.http import HttpResponse
+import json
 
 class CinemaList(ListAPIView):
     serializer_class = CinemaSerializer
@@ -29,10 +29,23 @@ class HallApi(APIView):
     def get(self, request, cinema_id):
         halls = Hall.objects.filter(cinema__id=cinema_id)
         serializer = HallSerializer(halls, many=True)
-        return Response(serializer.data)
-
+        print(serializer.data)
+        # return Response(serializer.data)
+        return HttpResponse(json.dumps(serializer.data))
+    
 
     
+class BookTicketsApi(ListCreateAPIView):
+    
+    model = Seat
+
+    def post(self, request):
+        pass
+
+        
+    
+
+
 
 
 

@@ -49,4 +49,22 @@ $(document).ready(() => {
 
 
     });
+    var hallID = $("#hallID").val();
+    debugger
+    $.ajax({
+        url: `http://localhost:8000/get_seats_by_hall/${hallID}`,
+        type: 'GET',
+        success: (response) => {
+            for (let row = 0; row < response.seats.length; i++) {
+                var eachRow = response.seats[row];
+                for (let col = 0; col < eachRow.length; col++) {
+                    var element = eachRow[col];
+                    // шаблон append
+                    $("#seatsList").append(`
+                        
+                    `)
+                }
+            }
+        },
+    })
 })

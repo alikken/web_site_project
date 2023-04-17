@@ -25,7 +25,6 @@ class CinemaDetailView(View):
         cinema = Cinema.objects.get(url=slug)
         halls = Hall.objects.filter(cinema=cinema)
 
-        print('SFSEFSEFSEF', halls)
         return render(request, 'cinema_city/cinema_detail.html', {"cinema": cinema, "halls": halls})
 
 class CinemasListView(generics.ListAPIView):
@@ -33,9 +32,7 @@ class CinemasListView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Cinema.objects.filter(city=CityLocation.objects.get(pk=self.request.GET.get('city_id'))).all()
-        print(f'fsdfsdfsdf {queryset}')
-        print(CityLocation.objects.get(pk=self.request.GET.get('city_id')))
-        print(self.request.GET.get('city_id'))
+
         
         return queryset
     
@@ -43,18 +40,15 @@ class CinemasListView(generics.ListAPIView):
 class MoviePage(View):
     def get(self, request, slug):
         movie = Movie.objects.get(url=slug)
-        print('fsdfsdfsdf', movie)
+
         rating = Rating.objects.filter(movie=movie, user=request.user.customuser).first()
-        print('dsfsdfsdfsdfsdfsdf', rating)
+
         movie.user_rating = rating.rating if rating else 0
         
         return render(request, 'cinema_city/moviePage.html', {'moviepage': movie})
     
 def rate(request, movie_id: int, rating: int):
     
-    print('GDRGDRGDRGDRG')
-    print(movie_id)
-    print(request.GET)
     movie = Movie.objects.get(url=movie_id)
     Rating.objects.filter(movie=movie, user=request.user.customuser).delete()
     movie.rating_set.create(user=request.user.customuser, rating=rating)
@@ -64,21 +58,77 @@ def rate(request, movie_id: int, rating: int):
 
 
 
+# class BookTickets(View):
+#     template_name = "cinema_city/seats_hall.html"
+#     def get(self, request, hall_id, *args, **kwargs):
+
+#         hall = Hall.objects.get(id = hall_id)
+#         seats_busy = Seat.objects.filter(hall=hall)
+#         print('FFFFFFFFFFFFFFFFFFFFF',seats_busy)
+#         rows, cols, seats = [*range(hall.row_count)], [*range(hall.col_count)], []
+
+#         for row in rows:
+#             seats_row = []
+#             for col in cols:
+#                 is_busy = False
+#                 for seat in seats_busy:
+#                     if seat.row == row and seat.col == col:
+#                         is_busy = True
+#                 seats_row.append(is_busy)
+#             seats.append(seats_row)
+    
+#         context = {
+#             'hall': hall,
+#             'seats': seats,
+#         }
+#         return render(request, "cinema_city/seats_hall.html", context)
+    
+#     def post(self, request, hall_id, *args, **kwargs):
+#         if request.method == 'POST':
+#             seat_ids = request.POST.getlist('seat_id')
+#             print('FFFFFFFFFFFFFFFF', seat_ids)
+#             print(hall_id)
+#             user = request.user
+
+#             if not user.is_authenticated:
+#                 return HttpResponseForbidden()
+            
+#             hall = Hall.objects.get(id=hall_id)
+#             tickets = []
+
+#             for seat_id in seat_ids:
+#                 l = row, col = seat_id.split()
+#                 seat = Seat.objects.create(hall = hall,  row = int(l[0]), col = int(l[1]))
+
+#                 ticket = Ticket.objects.create(
+#                     user=user.customuser,
+#                     price=1500,  
+#                     seat_number=seat,
+#                     date=datetime.now(),
+#                 )
+#                 tickets.append(ticket)
+#         return redirect('home')
+    
+
 class BookTickets(View):
     template_name = "cinema_city/seats_hall.html"
+    
     def get(self, request, hall_id, *args, **kwargs):
-
-        hall = Hall.objects.get(id = hall_id)
-
+        hall = Hall.objects.get(id=hall_id)
+        seats_busy = Seat.objects.filter(hall=hall)
         seats = []
 
-        for i in range(1, hall.row_count):
+        for i in range(1, hall.row_count+1):
             row = []
-            
-            for j in range(1, hall.col_count):
-                row.append((i, j))
+            for j in range(1, hall.col_count+1):
+                is_busy = False
+                for seat in seats_busy:
+                    if seat.row == i and seat.col == j:
+                        is_busy = True
+                        break
+                row.append((i, j, is_busy))
             seats.append(row)
-
+        print("FFFFFFFFFFFF", seats)
 
         context = {
             'hall': hall,
@@ -87,12 +137,9 @@ class BookTickets(View):
         return render(request, "cinema_city/seats_hall.html", context)
     
     def post(self, request, hall_id, *args, **kwargs):
-        print('SFSEFSEFSEFSEFSEFSEFSEFSEFSEFS')
         if request.method == 'POST':
             seat_ids = request.POST.getlist('seat_id')
-            print(seat_ids)
             user = request.user
-            print(user)
 
             if not user.is_authenticated:
                 return HttpResponseForbidden()
@@ -101,10 +148,9 @@ class BookTickets(View):
             tickets = []
 
             for seat_id in seat_ids:
-                l = row, col = seat_id.split()
-                print('fdsfsdfsdfsdfsdfsdfd', int(l[0]))
-                seat = Seat.objects.create(hall = hall,  row = int(l[0]), col = int(l[1]))
-                print(seat)
+                row, col = seat_id.split()
+                seat = Seat.objects.create(hall=hall, row=int(row), col=int(col))
+
                 ticket = Ticket.objects.create(
                     user=user.customuser,
                     price=1500,  
@@ -112,8 +158,36 @@ class BookTickets(View):
                     date=datetime.now(),
                 )
                 tickets.append(ticket)
+       
         return redirect('home')
-    
+
+
+
+
+
+
+
+def get_seats_by_hall(request, hall_id):
+    seats = []
+
+    hall = Hall.objects.get(id = hall_id)
+    seats_busy = Seat.objects.filter(hall=hall)
+
+    rows, cols, seats = [*range(hall.row_count)], [*range(hall.col_count)], []
+
+    for row in rows:
+        seats_row = []
+        for col in cols:
+            is_busy = False
+            for seat in seats_busy:
+                if seat.row == row and seat.col == col:
+                    is_busy = True
+            seats_row.append(is_busy)
+        seats.append(seats_row)
+
+    return JsonResponse({"seats": seats}, safe=False)
+
+
 
 
 class TicketList(ListView):
@@ -123,8 +197,7 @@ class TicketList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        print('sdfsefesfsefsfsef', queryset)
-        print(queryset.filter(user=self.request.user.customuser))
+
         return queryset.filter(user=self.request.user.customuser )
     
 class TicketCheck(DetailView):

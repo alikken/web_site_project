@@ -1,25 +1,27 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
+{% comment %} <input type="hidden" id="hallID" value="{{hall.id}}">
   <form action="" method="POST">
       {% csrf_token %}
-      <ul class="seat-list">
+      <ul id="seatsList" class="seat-list">
         {% for row in seats %}
-          {% for seat in row %}
-            {% if forloop.first %}
-              <li class="seat-item new-row">
-                <span class="row-number">Ряд {{ seat.0 }}</span>
-              </li>
-            {% endif %}
-            <li class="seat-item">
+          {% for col in row %}
+            {% if col == True %}
+            
               <div class="checkbox ">
-                  <label for="seat_{{ seat.0 }}_{{ seat.1 }}"></label>
-                  <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}" > 
-                  {{ seat.0 }}|{{ seat.1 }}
+                <label for="seat_{{ rowIndex }}_{{ colIndex }}"></label>
+                <input type="checkbox" checked disabled name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}"> 
               </div>
-
-            </li>
+              
+            {% else %}
+              <div class="checkbox ">
+                <label for="seat_{{ seat.0 }}_{{ seat.1 }}"></label>
+                <input type="checkbox" name="seat_id" value="{{ seat.0 }} {{ seat.1 }}" id="seat_{{ seat.0 }}_{{ seat.1 }}" > 
+               
+              </div>
+            {% endif %}
+           
             {% if forloop.last and not forloop.parentloop.last %}
               </ul><ul class="seat-list">
             {% endif %}
@@ -29,22 +31,132 @@
 
       <button type="submit">Reserve seat</button>
 
+  </form> {% endcomment %}
+
+
+
+
+{% comment %}  {% endcomment %}
+{% comment %} Мой пример {% endcomment %}
+
+  <h1>{{ hall.name }}</h1>
+
+  <form method="post" action="">
+
+
+    {% comment %} {% csrf_token %}
+    <div class="screen">
+      <img src="https://ticket.kino.kz/static/media/display_light.3a44c046.svg" alt="">
+    </div>
+    {% for row in seats %}
+      <div class="row">
+        
+        {% for col in row %}
+          <div class="col">
+            {% if col.2 %}
+            
+              <input type="checkbox" class="seat-checkbox" disabled name="seat_id" value="{{ col.0 }} {{ col.1 }}" >
+            
+              {% else %}
+            
+              <input type="checkbox" class="seat-checkbox" name="seat_id" value="{{ col.0 }} {{ col.1 }}">
+            
+              {% endif %}
+            <label class="seat-label">{{ col.0 }}|{{ col.1 }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-warning">Book tickets</button> {% endcomment %}
+
+
+
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Модалка
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ hall.name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        
+          {% csrf_token %}
+          <div class="screen">
+            <img src="https://ticket.kino.kz/static/media/display_light.3a44c046.svg" alt="">
+          </div>
+          {% for row in seats %}
+            <div class="row">
+              
+              {% for col in row %}
+                <div class="col">
+                  {% if col.2 %}
+                  
+                    <input type="checkbox" class="seat-checkbox" disabled name="seat_id" value="{{ col.0 }} {{ col.1 }}" >
+                  
+                    {% else %}
+                  
+                    <input type="checkbox" class="seat-checkbox" name="seat_id" value="{{ col.0 }} {{ col.1 }}">
+                  
+                    {% endif %}
+                  <label class="seat-label">{{ col.0 }}|{{ col.1 }}</label>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+      
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-warning">Book tickets</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   </form>
 
 
 
-  <style>
-    {% comment %} input[type="checkbox"] {
-      display: none;
-    } {% endcomment %}
 
-    .checkbox label:before {
-      content: url("https://cdn-icons-png.flaticon.com/32/1683/1683707.png");
-    } 
+
+
+
+
+
+
+
+  <style>
+
+    .screen {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 5px;
+    }
     
-    .checkbox input[type="checkbox"]:checked + label:before {
+    .screen img {
+      width: 90%;
+    }
+    
+
+    .seat-checkbox:checked + .seat-label:before {
       content: url("https://cdn-icons-png.flaticon.com/32/1683/1683809.png");
     }
+    
+    .seat-checkbox:disabled + .seat-label:before {
+      content: url("https://ticket.kino.kz/static/media/busy_light.ac4fa5e9.svg");
+    }
+    
+    .seat-checkbox + .seat-label:before {
+      content: url("https://ticket.kino.kz/static/media/empty_light.f550f048.svg");
+    }
+    
 
     .seat-list {
       display: flex;
@@ -66,6 +178,8 @@
     
   
   </style>
+
+  <script src="/static/js/main.js"></script>
 
 {% endblock content %}
 

@@ -28,6 +28,11 @@ urlpatterns = [
     # path('check_seat/', views.check_seat, name='check_seat'),
     path('tickets/list/', views.TicketList.as_view()),
     path('ticket/<int:pk>/', views.TicketCheck.as_view(), name='ticket_check'),
+
+
+    
+
+    path('get_seats_by_hall/<int:hall_id>', views.get_seats_by_hall)
 ]
 
 

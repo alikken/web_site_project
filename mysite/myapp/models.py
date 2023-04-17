@@ -85,7 +85,9 @@ class Seat(models.Model):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
     row = models.IntegerField()
     col = models.IntegerField()
+    is_busy = models.BooleanField(default=False)
 
+    
 class Ticket(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1500)
