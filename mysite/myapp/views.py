@@ -25,6 +25,11 @@ class CinemaDetailView(View):
         cinema = Cinema.objects.get(url=slug)
         halls = Hall.objects.filter(cinema=cinema)
 
+        # show_movies = []
+
+        # for hall in halls:
+        #     show_movies.extend(hall.show_movie.all())
+            
         return render(request, 'cinema_city/cinema_detail.html', {"cinema": cinema, "halls": halls})
 
 class CinemasListView(generics.ListAPIView):
@@ -163,27 +168,8 @@ class BookTickets(View):
 
 
 
-
-
-
-
 def get_seats_by_hall(request, hall_id):
     seats = []
-
-    hall = Hall.objects.get(id = hall_id)
-    seats_busy = Seat.objects.filter(hall=hall)
-
-    rows, cols, seats = [*range(hall.row_count)], [*range(hall.col_count)], []
-
-    for row in rows:
-        seats_row = []
-        for col in cols:
-            is_busy = False
-            for seat in seats_busy:
-                if seat.row == row and seat.col == col:
-                    is_busy = True
-            seats_row.append(is_busy)
-        seats.append(seats_row)
 
     return JsonResponse({"seats": seats}, safe=False)
 

@@ -23,16 +23,17 @@ urlpatterns = [
     path('cinema/<slug:slug>/', views.CinemaDetailView.as_view()),
     path('get_theatre_by_city_id', views.CinemasListView.as_view(), name='get_theatre_by_city_id'),
 
-    # path('hall/<int:hall_id>/select_seat/', views.select_seat, name='select_seat')
+    
     path('halls/<int:hall_id>/', views.BookTickets.as_view()),
-    # path('check_seat/', views.check_seat, name='check_seat'),
+    
     path('tickets/list/', views.TicketList.as_view()),
     path('ticket/<int:pk>/', views.TicketCheck.as_view(), name='ticket_check'),
 
 
     
 
-    path('get_seats_by_hall/<int:hall_id>', views.get_seats_by_hall)
+    path('get_seats_by_hall/<int:hall_id>', views.get_seats_by_hall),
+
 ]
 
 
