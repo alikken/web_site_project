@@ -1,8 +1,10 @@
 import 'package:mobileapp/models/cinema.dart';
+import 'package:mobileapp/models/hall.dart';
 import 'package:mobileapp/storage/storage.dart';
 
 import '../api/api_connect.dart';
 import '../api/api_models.dart';
+import '../models/showMovie.dart';
 
 class HomeController {
   Future<void> loginUser(String username, String password) async {
@@ -40,8 +42,49 @@ class HomeController {
           id: element['id'],
           cinema: element['cinema'],
           address: element['address'],
-          city: element['city']));
+          city: element['city'],
+          image: element['image'],
+          image_detail: element['image_detail'],
+          info: element['info']));
     });
+    print('SOSISOSISOSI ${allTheater}');
     return allTheater;
+  }
+
+  // Future<List<Hall>> getHall(int cinema) async {
+  //   List<Hall> hallCinema = [];
+  //   List<dynamic> result = await hallApi(cinema);
+
+  //   result.forEach((element) {
+  //     hallCinema.add(Hall(
+  //         id: element['id'],
+  //         cinema: element['cinema'],
+  //         show_movie: element['show_movie'],
+  //         name: element['name'],
+  //         row_count: element['row_count'],
+  //         col_count: element['col_count']));
+  //   });
+  //   print('SSSSSSSSSSSSSSSADADWDASWWD ${hallCinema}');
+  //   return hallCinema;
+  // }
+  Future<List<Hall>> getHall(int cinema) async {
+    List<Hall> hallCinema = [];
+    List<dynamic> result = await hallApi(cinema);
+
+    result.forEach((element) {
+      List<dynamic> showMovieJson = element['show_movie'];
+      List<ShowMovie> showMovieList =
+          showMovieJson.map((e) => ShowMovie.fromJson(e)).toList();
+      hallCinema.add(Hall(
+          id: element['id'],
+          cinema: element['cinema'],
+          show_movie: showMovieList,
+          name: element['name'],
+          row_count: element['row_count'],
+          col_count: element['col_count']));
+    });
+
+    print('HallCinema: ${hallCinema}');
+    return hallCinema;
   }
 }
