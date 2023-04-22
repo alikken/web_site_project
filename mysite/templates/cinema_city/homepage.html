@@ -1,12 +1,9 @@
 {% extends 'layout.html' %}
 
-
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="row">
     <div class="col-12">
       <div class="nav-item dropdown display-6">
@@ -19,67 +16,135 @@
         </ul>
       </div>
     </div> 
-
-    <div class="col-lg-9">
-      <div id='result'>
-        {% for cinema in cinema_list %}
-        <div class="row">
-          <div class="col-sm-3">
-              <a href="/cinema/{{cinema.url}}" class="text-decoration-none text-black ">
-                <div class="container-sm">
-                    <div class="card border border-0" style="width: 32rem; height: 7rem;">
-                        <div class="card-body" >
-                            <div class="row row-cols-auto">
-                                <div class="col">
-                                    <img class="img-cinema card-img rounded" src="/media/{{cinema.image}}" width="75" height="75">
-                                </div>
-                                <div class="col">
-                                    <p class="fw-medium">{{cinema.cinema}}|{{cinema.city}}</p>
-                                    <p>{{cinema.address}}</p>
-                                </div>
-                            </div>  
-                        </div>
-                    </div>
+  {% comment %} Карточки {% endcomment %}
+    <div id='result'>
+      {% for cinema in cinema_list %}
+      <div class="card-cinema">
+        <a href="/cinema/{{cinema.url}}" class="text-decoration-none text-black ">
+          <div class="container-sm">
+            <div class="card border border-0" style="width: 26rem; height: 7rem;">
+              <div class="card-body">
+                <div class="row row-cols-auto">
+                  <div class="col">
+                    <img class="img-cinema card-img rounded" src="/media/{{cinema.image}}" width="75" height="75">
+                  </div>
+                  <div class="col">
+                    <p class="fw-medium">{{cinema.cinema}}|{{cinema.city}}</p>
+                    <p>{{cinema.address}}</p>
+                  </div>
                 </div>
-              </a>
+              </div>
+            </div>
           </div>
-        </div>
-        {% endfor %}
+        </a>
       </div>
-      
-    </div>  
+      {% endfor %}
+    </div>
+  
 </div> 
 
 <div class="container carusel">
   <h3>Фильмы в прокате</h3>
   <div class="owl-carousel owl-theme">
-    
     {% for f in movie_title %}
-    <div class="item"><a href="/movie/{{f.url}}"><img src="/media/{{f.detail_img}}" id="title_movie" class="card-img-top" height="150"></a></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
-    <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
+      <div class="item">
+        <div class="card-movie">
+          <div class="card-movie-img">
+            <a href="/movie/{{f.url}}"><img src="/media/{{f.img}}" alt="{{ f.title }}"></a>
+          </div>
+          <div class="card-movie-info">
+            <h3 class="card-movie-title">{{ f.title }}</h3>
+            <p class="card-movie-genre">{{ f.genre }}</p>
+            <p class="card-movie-rating">{{ f.average_rating|floatformat:0 }} <i class="fa fa-star checked"></i></p>
+          </div>
+        </div>
+      </div>
+      <div class="item"></div>
     {% endfor %}
   </div>
 </div>
 
-<div class="container">
-  {% for f in movie_title %}
-  <p>{{f.title}}</p>
-  <a href="/movie/{{f.url}}">{{f.title}}</a>
-  <img src="/media/{{f.detail_img}}" id="title_movie" alt="">
-  {% endfor %}
-</div>
+
+<style>
+  .ite, {
+    margin: 0px;
+  }
+
+  .card-movie {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    margin: 10px;
+  }
+  
+  .card-movie-img {
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .card-movie-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-movie-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 30%;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+  }
+  
+  .card-movie-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .card-movie-genre {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+    text-align: right;
+    color: #666;
+  }
+  
+  .card-movie-rating {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    text-align: right;
+    color: orange;
+  }
+</style>
+
+<style>
+
+  .card-cinema {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    width: calc(33.33% - 5px);
+  }
+
+  #result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
 
+</style>
 
 <style>
   .owl-carousel .owl-nav button.owl-prev,
@@ -101,13 +166,13 @@
     color: orange;
   }
 
-/* Кнопки карусели */
-.owl-prev {
-    position: absolute;
-    top: 50%;
-    left: -50px; /* отступ от левого края */
-    transform: translateY(-50%);
-  }
+  /* Кнопки карусели */
+  .owl-prev {
+      position: absolute;
+      top: 50%;
+      left: -50px; /* отступ от левого края */
+      transform: translateY(-50%);
+    }
   
   .owl-next {
     position: absolute;
@@ -120,6 +185,8 @@
 
 
 </style>
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

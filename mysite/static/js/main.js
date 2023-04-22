@@ -18,25 +18,25 @@ $(document).ready(() => {
                 response.forEach(cinema=> {
                    
                     $("#result").append(`
-
-                        <a href="/${cinema.url}" class="text-decoration-none text-black ">
-                            <div class="container-sm">
-                                <div class="card border border-0" style="width: 32rem; height: 7rem;">
-                                    <div class="card-body" >
-                                        <div class="row row-cols-auto">
-                                            <div class="col">
-                                                <img class="img-cinema card-img rounded" src="${cinema.image}" width="75" height="75">
-                                            </div>
-                                            <div class="col">
-                                                <p class="fw-medium">${cinema.cinema}|${cinema.city}</p>
-                                                <p>${cinema.address}</p>
-                                            </div>
-                                        </div>  
+                        <div class="card-cinema">
+                            <a href="/${cinema.url}" class="text-decoration-none text-black ">
+                                <div class="container-sm">
+                                    <div class="card border border-0" style="width: 26rem; height: 7rem;">
+                                        <div class="card-body" >
+                                            <div class="row row-cols-auto">
+                                                <div class="col">
+                                                    <img class="img-cinema card-img rounded" src="${cinema.image}" width="75" height="75">
+                                                </div>
+                                                <div class="col">
+                                                    <p class="fw-medium">${cinema.cinema}|${cinema.city}</p>
+                                                    <p>${cinema.address}</p>
+                                                </div>
+                                            </div>  
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-
+                            </a>
+                        </div>
 
                     `);
                 });
