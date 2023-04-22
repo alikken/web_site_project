@@ -3,14 +3,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />    
 </head>
+
 <body>
-<header class="header">
+{% comment %} <header class="header">
     <div class="header__controller">
-      <span class="iconify" data-icon="fa-solid:couch" data-flip="horizontal" 
-          style="font-size:56px;" color="white"></span>
+
       <div class="user_info">
           <div class="navs">
-              {% comment %} <a class="nav-link" id="nav1" aria-current="page" href="{% url 'home' %}">Новости</a> {% endcomment %}
+              
               
               {% if not user.is_authenticated %}
                 <a href="{% url 'login' %}" id="nav1" class="nav-item nav-link">Login</a>
@@ -22,20 +22,80 @@
           </div>
       </div>  
     </div>
-  </header> 
+</header>  {% endcomment %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">ALIK Cinema</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto ">
+        <li class="nav-item">
+          <a class="nav-link mx-2" aria-current="page" href="{% url 'home' %}">Главная</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="{% url 'tickets' %}">Мои билеты</a>
+          </li>
+        {% endif %}
+        {% if user.is_staff and user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#">Админ панель</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          {% if not user.is_authenticated %}
+            <a class="nav-link mx-2" href="{% url 'login' %}">Войти</a>
+          {% elif user.is_staff and user.is_authenticated%}
+            <a class="nav-link mx-2" href="{% url 'logout' %}">{{ user.username }}/Выйти</a> 
+          {% else %}
+            <a href="{% url 'logout' %}" id="nav1" class="nav-item nav-link">{{ user.username }}/Выйти</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-
-
-
+ 
   <div class="container">
   {% block content %}
   {% endblock content %} 
   </div>  
 
+
+<footer class="bg-dark text-light py-3 fixed">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h3>О нас</h3>
+        <p>Мы являемся крупной сетью кинотеатров Казахстана. <br> Наши сотрудники всегда рады новым посетителям и готовы подарить множество новых, позитивных эмоций.</p>
+        
+      </div>
+      <div class="col-md-3">
+        <h3>Контакты</h3>
+        <ul class="list-unstyled">
+          
+          <li><i class="bi bi-envelope-fill me-2"></i>Email: info@example.com</li>
+          <li><i class="bi bi-phone-fill me-2"></i>Телефон: +7 (999) 123-45-67</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+
+</style>
 </body>
 </html>
 

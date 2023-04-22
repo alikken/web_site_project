@@ -3,7 +3,7 @@ $(document).ready(() => {
         var cityID = event.target.attributes['data-city-id'].value;
  
         $.ajax({
-            url: `http://192.168.1.6:8000/get_theatre_by_city_id?city_id=${cityID}`,
+            url: `/get_theatre_by_city_id?city_id=${cityID}`,
             method: 'GET',
             headers: {
                 "x-csrf-token": $("input[name='csrfmiddlewaretoken']").val(),
@@ -25,7 +25,7 @@ $(document).ready(() => {
                                     <div class="card-body" >
                                         <div class="row row-cols-auto">
                                             <div class="col">
-                                                <img class="img-cinema card-img rounded" src="${cinema.image}" alt="">
+                                                <img class="img-cinema card-img rounded" src="${cinema.image}" width="75" height="75">
                                             </div>
                                             <div class="col">
                                                 <p class="fw-medium">${cinema.cinema}|${cinema.city}</p>
@@ -45,30 +45,42 @@ $(document).ready(() => {
                 alert("Ошибочка")
             }
         })
-
-
-
-    });
-    var hallID = $("#hallID").val();
-    debugger
-    $.ajax({
-        url: `http://localhost:8000/get_seats_by_hall/${hallID}`,
-        type: 'GET',
-        success: (response) => {
-            for (let row = 0; row < response.seats.length; i++) {
-                var eachRow = response.seats[row];
-                for (let col = 0; col < eachRow.length; col++) {
-                    var element = eachRow[col];
-                    // шаблон append
-                    $("#seatsList").append(`
-                        
-                    `)
-                }
-            }
-        },
     });
 
 
-    // Новый ajax
+
+// // Новый ajax
+//     $("[id]").click((event) => {
+//     var hallID = event.target.attributes['data-hall-id'].value;
+
     
+//     $.ajax({
+//         url: `http://172.16.59.6:8000/get_seats_by_hall/${hallID}`,
+//         type: 'GET',
+//         headers: {
+//             "x-csrf-token": $("input[name='csrfmiddlewaretoken']").val(),
+//             contentType: 'application/json',
+//         },
+//         success: (response) => {
+//             var seatsDiv = $("div");
+
+//             response.forEach((hall)=> {
+                
+//                 seatsDiv.append(`<input type="checkbox" value="${hall.fields}">`)
+//             });
+            
+//             // $("#mainDiv").append(seatsDiv);
+//             $("#exampleModal").show();
+//         },
+//         error: () => {
+//             alert("Ошибочка")
+//         }
+//     })
+//     });
 })
+
+
+
+
+
+  

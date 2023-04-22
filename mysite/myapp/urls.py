@@ -26,7 +26,7 @@ urlpatterns = [
     
     path('halls/<int:hall_id>/', views.BookTickets.as_view()),
     
-    path('tickets/list/', views.TicketList.as_view()),
+    path('tickets/list/', views.TicketList.as_view(), name='tickets'),
     path('ticket/<int:pk>/', views.TicketCheck.as_view(), name='ticket_check'),
 
 

@@ -42,98 +42,93 @@
   <h1>{{ hall.name }}</h1>
 
   <form method="post" action="">
-
-
-    {% comment %} {% csrf_token %}
+  {% csrf_token %}
+    
     <div class="screen">
-      <img src="https://ticket.kino.kz/static/media/display_light.3a44c046.svg" alt="">
+      <img src="https://ticket.kino.kz/static/media/display_light.3a44c046.svg">
     </div>
+
     {% for row in seats %}
       <div class="row">
-        
         {% for col in row %}
           <div class="col">
             {% if col.2 %}
-            
               <input type="checkbox" class="seat-checkbox" disabled name="seat_id" value="{{ col.0 }} {{ col.1 }}" >
-            
-              {% else %}
-            
+            {% else %}
               <input type="checkbox" class="seat-checkbox" name="seat_id" value="{{ col.0 }} {{ col.1 }}">
-            
-              {% endif %}
+            {% endif %}
             <label class="seat-label">{{ col.0 }}|{{ col.1 }}</label>
           </div>
         {% endfor %}
       </div>
     {% endfor %}
 
-    <button type="submit" class="btn btn-warning">Book tickets</button> {% endcomment %}
 
 
 
+  {% comment %} <button type="submit" class="btn btn-warning">Book tickets</button> {% endcomment %}
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Модалка
+  <button type="button" class="btn btn-warning btn-payment" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    К оплате
   </button>
-  <!-- Modal -->
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ hall.name }}</h5>
+          {% comment %} <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> {% endcomment %}
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        
-          {% csrf_token %}
-          <div class="screen">
-            <img src="https://ticket.kino.kz/static/media/display_light.3a44c046.svg" alt="">
-          </div>
-          {% for row in seats %}
-            <div class="row">
-              
-              {% for col in row %}
-                <div class="col">
-                  {% if col.2 %}
-                  
-                    <input type="checkbox" class="seat-checkbox" disabled name="seat_id" value="{{ col.0 }} {{ col.1 }}" >
-                  
-                    {% else %}
-                  
-                    <input type="checkbox" class="seat-checkbox" name="seat_id" value="{{ col.0 }} {{ col.1 }}">
-                  
-                    {% endif %}
-                  <label class="seat-label">{{ col.0 }}|{{ col.1 }}</label>
+          <div class="container p-0">
+            <div class="card px-4">
+                <p class="h8 py-3">Payment Details</p>
+                <div class="row gx-3">
+                    <div class="col-12">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">Card Number</p>
+                            <input class="form-control mb-3" type="text" placeholder="1234 5678 435678">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">Expiry</p>
+                            <input class="form-control mb-3" type="text" placeholder="MM/YYYY">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column">
+                            <p class="text mb-1">CVV/CVC</p>
+                            <input class="form-control mb-3 pt-2 " type="password" placeholder="***">
+                        </div>
+                    </div>
+                   
                 </div>
-              {% endfor %}
-            </div>
-          {% endfor %}
-      
+          </div>
         </div>
+      </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-warning">Book tickets</button>
+          <button type="submit" class="btn btn-warning">Оплатить</button>
         </div>
       </div>
     </div>
   </div>
 
-
   </form>
 
 
-
-
-
-
-
-
-
-
-
   <style>
+    .btn-payment {
+      
+    }
 
+    .modal-footer {
+      border-top: none;
+    }
+    .modal-header {
+      border-bottom: none;
+    }
+    
     .screen {
       display: flex;
       justify-content: center;
@@ -144,7 +139,6 @@
       width: 90%;
     }
     
-
     .seat-checkbox:checked + .seat-label:before {
       content: url("https://cdn-icons-png.flaticon.com/32/1683/1683809.png");
     }
@@ -157,7 +151,6 @@
       content: url("https://ticket.kino.kz/static/media/empty_light.f550f048.svg");
     }
     
-
     .seat-list {
       display: flex;
       flex-wrap: wrap;
@@ -176,10 +169,8 @@
       font-size: 14px;
     }
     
-  
   </style>
 
-  <script src="/static/js/main.js"></script>
 
 {% endblock content %}
 

@@ -1,15 +1,27 @@
 from rest_framework import serializers
-
 from .models import *
 
-class MovieShowSerializer(serializers.ModelSerializer):
+class GenreSerializer(serializers.ModelSerializer):
+
+
     class Meta:
-        model = ShowMovie
-        fields = '__all__'
+        model = Genre
+        fields = ('title',)
 
 class MovieSerializer(serializers.ModelSerializer):
+
+    genre = GenreSerializer(many=True)
+
     class Meta:
         model = Movie
+        fields = '__all__'
+
+class MovieShowSerializer(serializers.ModelSerializer):
+
+    movie = MovieSerializer()
+
+    class Meta:
+        model = ShowMovie
         fields = '__all__'
 
 class CinemaSerializer(serializers.ModelSerializer):
@@ -30,22 +42,27 @@ class HallSerializer(serializers.ModelSerializer):
 
 class SeatSerializer(serializers.ModelSerializer):
 
+
     class Meta:
         model = Seat
         fields = '__all__'
 
 class TicketSerializer(serializers.ModelSerializer):
 
+    seat_nimber = SeatSerializer()
+
     class Meta:
         model = Ticket
         fields = '__all__'
 
 
+class RatingSerializer(serializers.ModelSerializer):
 
-# class RatingSerializer(serializers.models):
+    movie = MovieSerializer()
 
-#     class Meta:
-#         model = Rating
-#         fields = '__all__'
+    class Meta:
+        model = Rating
+        fields = '__all__'
+
 
 

@@ -4,7 +4,7 @@ from login.models import CustomUser
 from django.db.models import Avg
 
 class CityLocation(models.Model):
-    name = models.CharField('Город', max_length=128, unique=True)
+    name = models.CharField('Город', max_length=128, unique=True, default="Караганда")
     # url = models.SlugField(max_length=160, unique=True)
 
     class Meta:
@@ -67,7 +67,7 @@ class Rating(models.Model):
         return f"{self.movie.title}: {self.rating}"
 
 class ShowMovie(models.Model):
-    movie_show = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
     time_show = models.TimeField(default='08:00')
 
 class Hall(models.Model):

@@ -4,19 +4,92 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+{% comment %} <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> {% endcomment %}
 
 
     <h1>My Tickets</h1>
     <ul>
         {% for ticket in tickets %}
             <a href="{% url 'ticket_check' pk=ticket.pk %}">
-            <li>Ticket ID: {{ ticket.id }}, Seat Number: {{ ticket.seat_number }}, Date: {{ ticket.date }}, Price: {{ ticket.price }}</li>
-            </a>    
+                f
+            </a>
+            <li>Ticket ID: {{ ticket.id }}, Seat Number: {{ ticket.seat_number.row }}|{{ ticket.seat_number.col }}, Date: {{ ticket.date }}, Price: {{ ticket.price }}</li>
+            
+
+
         {% empty %}
             <li>You have no tickets.</li>
         {% endfor %}
     </ul>
 
+
+
+
+
+
+<style>
+    /* Main Ticket Style */
+    .ticketContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: orange;
+    }
+    .ticket{
+        animation: bouncingCard 0.6s ease-out infinite alternate;
+        background-color: white;
+        color: darkslategray;
+        border-radius: 12px;
+    }
+
+    /* Ticket Content */
+    .ticketTitle{
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 12px 16px 4px;
+    }
+    hr{
+        width: 90%;
+        border: 1px solid #efefef;
+    }
+    .ticketDetail{
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 4px 16px;
+    }
+    .ticketSubDetail{
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        padding: 12px 16px;
+    }
+    .ticketSubDetail .code{
+        margin-right: 24px;
+    }
+
+    /* Ticket Ripper */
+    .ticketRip{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .circleLeft{
+        width: 12px;
+        height: 24px;
+        background-color: orange;
+        border-radius: 0 12px 12px 0;
+    }
+    .ripLine{
+        width: 100%;
+        border-top: 3px solid orange;
+        border-top-style: dashed ;
+    }
+    .circleRight{
+        width: 12px;
+        height: 24px;
+        background-color: orange;
+        border-radius: 12px 0 0 12px;
+    }
+</style>
 {% endblock content %}

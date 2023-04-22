@@ -5,120 +5,20 @@
 
 
 
-
-<div class="ticketDetail">
-    <div>Movie:&ensp; {{ticket.seat_number.hall.show_movie.all.0.movie_show}}</div>
-    <div>Studio:&nbsp; {{ticket.seat_number.hall}}</div>
-    <div>Time:&emsp; {{ticket.seat_number.hall.show_movie.all.0.time_show}}</div>
-</div>
-
-{% comment %}  {% endcomment %}
-<!--Creates the popup body-->
-<div class="popup-overlay">
-    <!--Creates the popup content-->
-    <div class="popup-content">
-      <h2>Pop-Up</h2>
-        <div class="position-absolute top-50 start-50 translate-middle">
-
-            <div class="ticketContainer">
-                <div class="ticketContainer">
-                    <div class="ticket">
-                        <div class="ticketTitle">{{ticket.seat_number.hall.cinema}}</div>
-                        <hr>
-                        <div class="ticketDetail">
-                        <div>Movie:&ensp; {{ticket.seat_number.hall.show_movie.all.0.movie_show}}</div>
-                        <div>Studio:&nbsp; {{ticket.seat_number.hall}}</div>
-                        <div>Time:&emsp; {{ticket.seat_number.hall.show_movie.first.time_show}}</div>
-                        </div>
-            
-                        <div class="ticketRip">
-                        <div class="circleLeft"></div>
-                        <div class="ripLine"></div>
-                        <div class="circleRight"></div>
-                        </div>
-            
-                        <div class="ticketSubDetail">  
-                        <div class="code">LO-2314XXX</div>
-                        <div class="date"> {{ticket.date}}</div>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-
-        </div>
-      <!--popup's close button-->
-      <button class="close">Close</button> </div>
-  </div>
-  <!--Content shown when popup is not displayed-->
-  <h2>jQuery Pop-Up Example</h2>
-  <button class="open">Open</button>
-
-  <style>
-    .popup-overlay {
-        /*Hides pop-up when there is no "active" class*/
-        visibility: hidden;
-        position: absolute;
-        background: orange;
-        border: 3px solid #666666;
-        width: 25%;
-        height: 50%;
-        left: 25%;
-      }
-      .popup-overlay.active {
-        /*displays pop-up when "active" class is present*/
-        visibility: visible;
-        {% comment %} text-align: center; {% endcomment %}
-      }
-      
-      .popup-content {
-        /*Hides pop-up content when there is no "active" class */
-        visibility: hidden;
-      }
-      
-      .popup-content.active {
-        /*Shows pop-up content when "active" class is present */
-        visibility: visible;
-      }
-      
-      button {
-        display: inline-block;
-        vertical-align: middle;
-        border-radius: 30px;
-        margin: .20rem;
-        font-size: 1rem;
-        color: #666666;
-        background: #ffffff;
-        border: 1px solid #666666;
-      }
-      
-      button:hover {
-        border: 1px solid #666666;
-        background: #666666;
-        color: #ffffff;
-      }
-  </style>
-  <script>
-    $(".open").on("click", function() {
-        $(".popup-overlay, .popup-content").addClass("active");
-      });
-      
-      //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
-      $(".close, .popup-overlay").on("click", function() {
-        $(".popup-overlay, .popup-content").removeClass("active");
-      });
-  </script>
-{% comment %}  {% endcomment %}
-
-<div class="position-absolute top-50 start-50 translate-middle">
-        <div class="ticketContainer">
+<div class="position-absolute top-50 start-50 translate-middle"> 
+    <div class="card" style="width: 24rem; height: 22rem">
+        <div class="card-body">
             <div class="ticketContainer">
                 <div class="ticket">
-                    <div class="ticketTitle">{{ticket.seat_number.hall.cinema}}</div>
+                    <div class="ticketTitle">Кинотеатр: {{ticket.seat_number.hall.cinema}}</div>
                     <hr>
                     <div class="ticketDetail">
-                    <div>Movie:&ensp; {{ticket.seat_number.hall.show_movie.all.0.movie_show}}</div>
-                    <div>Studio:&nbsp; {{ticket.seat_number.hall}}</div>
-                    <div>Time:&emsp; {{ticket.seat_number.hall.show_movie.first.time_show}}</div>
+                    <div>Фильм:&ensp;{{ticket.seat_number.hall.show_movie.all.0.movie}}</div>
+                    <div>Зал:&nbsp;{{ticket.seat_number.hall}}</div>
+                    <div>Ряд:&nbsp;{{ticket.seat_number.row}}</div>
+                    <div>Место:&nbsp;{{ticket.seat_number.col}}</div>
+                    <div>Время:&nbsp;{{ticket.seat_number.hall.show_movie.first.time_show|time:"H:i"}}</div>
+                    <div>Цена:&nbsp;{{ticket.price}}</div>
                     </div>
         
                     <div class="ticketRip">
@@ -129,24 +29,31 @@
         
                     <div class="ticketSubDetail">  
                     <div class="code">LO-2314XXX</div>
-                    <div class="date"> {{ticket.date}}</div>
+                    <div class="date"> {{ticket.date|date:"d.m.Y H:i"}}</div>
                     </div>
                 </div>
             </div> 
         </div>
+    </div>
 </div>
 
+
 <style>
+    .card{
+        box-shadow: 0px 0px 10px grey;
+        background-color: orange;
+    }
 
     /* Main Ticket Style */
     .ticketContainer{
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: orange;
+        
+        
     }
     .ticket{
-        animation: bouncingCard 0.6s ease-out infinite alternate;
+        
         background-color: white;
         color: darkslategray;
         border-radius: 12px;
@@ -202,5 +109,4 @@
     }
     
 </style>
-
 {% endblock content %}

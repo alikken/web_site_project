@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<input type="hidden" id="hallID" value="{{hall.id}}">
+{% comment %} <input type="hidden" id="hallID" value="{{hall.id}}"> {% endcomment %}
 
 
 
@@ -11,23 +11,14 @@
 <h3>{{cinema.city}}</h3>
 
 
-{% comment %} {% for hall in halls %}
-    <li><a href="/halls/{{hall.id}}/">Купить Билет</a></li>
-    <p>{{hall.id}} {{ hall.name }}</p>
-    <ul>
-        {% for show_movie in hall.show_movie.all %}
-            <li>{{ show_movie.movie_show.title }} at {{ show_movie.time_show|time:"H:i" }}</li>
-        {% endfor %}
-    </ul>
-{% endfor %} {% endcomment %}
-
 
 {% for hall in halls %}
     <li><a href="/halls/{{hall.id}}/">Купить Билет</a></li>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" data-hall-id="{{hall.id}}" id="{{hall.id}}"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Купить билет
-      </button>
+    </button>
+
 
     <p>{{hall.id}} {{ hall.name }}</p>
     <ul>
@@ -35,9 +26,8 @@
             <li>{{ show_movie.movie_show.title }} at {{ show_movie.time_show|time:"H:i" }}</li>
         {% endfor %}
     </ul>
+    
 {% endfor %}
-
-
 
 
 

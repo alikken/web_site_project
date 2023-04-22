@@ -4,19 +4,21 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 <div class="row">
-    <div class="col-3">
+    <div class="col-12">
       <div class="nav-item dropdown display-6">
         <a class="nav-link dropdown-toggle show text" href="#" data-bs-toggle="dropdown" aria-expanded="true">Кинотеатры</a>
         <ul class="dropdown-menu show" >
             {% csrf_token %}
             {% for a in city_list %}
               <li><a class="dropdown-item" data-city-id="{{ a.id }}" id="cinema{{ a.id }}" href="#">{{ a.name }}</a></li>
-              
             {% endfor %}
         </ul>
       </div>
-    </div>
+    </div> 
 
     <div class="col-lg-9">
       <div id='result'>
@@ -29,7 +31,7 @@
                         <div class="card-body" >
                             <div class="row row-cols-auto">
                                 <div class="col">
-                                    <img class="img-cinema card-img rounded" src="/media/{{cinema.image}}" alt="">
+                                    <img class="img-cinema card-img rounded" src="/media/{{cinema.image}}" width="75" height="75">
                                 </div>
                                 <div class="col">
                                     <p class="fw-medium">{{cinema.cinema}}|{{cinema.city}}</p>
@@ -49,9 +51,11 @@
 </div> 
 
 <div class="container carusel">
+  <h3>Фильмы в прокате</h3>
   <div class="owl-carousel owl-theme">
+    
     {% for f in movie_title %}
-    <div class="item"><a href="/movie/{{f.url}}"><img src="/media/{{f.detail_img}}" id="title_movie" class="card-img-top" alt="..."></a></div>
+    <div class="item"><a href="/movie/{{f.url}}"><img src="/media/{{f.detail_img}}" id="title_movie" class="card-img-top" height="150"></a></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
     <div class="item"><img src="https://via.placeholder.com/150" class="card-img-top" alt="..."></div>
@@ -67,7 +71,6 @@
   </div>
 </div>
 
-
 <div class="container">
   {% for f in movie_title %}
   <p>{{f.title}}</p>
@@ -75,6 +78,49 @@
   <img src="/media/{{f.detail_img}}" id="title_movie" alt="">
   {% endfor %}
 </div>
+
+
+
+<style>
+  .owl-carousel .owl-nav button.owl-prev,
+  .owl-carousel .owl-nav button.owl-next {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .owl-carousel .owl-nav button.owl-prev:hover,
+  .owl-carousel .owl-nav button.owl-next:hover {
+    background-color: 	#b0b0b0;
+  }
+  
+  ion-icon {
+    font-size: 40px;
+    color: orange;
+  }
+
+/* Кнопки карусели */
+.owl-prev {
+    position: absolute;
+    top: 50%;
+    left: -50px; /* отступ от левого края */
+    transform: translateY(-50%);
+  }
+  
+  .owl-next {
+    position: absolute;
+    top: 50%;
+    right: -50px; /* отступ от правого края */
+    transform: translateY(-50%);
+  }
+
+
+
+
+</style>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="/static/js/main.js"></script>
