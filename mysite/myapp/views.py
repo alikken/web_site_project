@@ -2,7 +2,7 @@
 from datetime import datetime
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Cinema, CityLocation, Hall, Movie, Rating, Seat, Ticket
+from .models import Cinema, CityLocation, Hall, Movie, Rating, Seat, ShowMovie, Ticket
 
 from django.views.generic import View, ListView, DetailView
 from django.http.request import HttpRequest
@@ -50,7 +50,8 @@ class CinemasListView(generics.ListAPIView):
 class MoviePage(View):
     def get(self, request, slug):
         movie = Movie.objects.get(url=slug)
-        
+
+        halls = Hall.objects.filter(show_movie__movie=movie)
         
         if request.user.is_authenticated:
             rating = Rating.objects.filter(movie=movie, user=request.user.customuser).first()
@@ -61,7 +62,7 @@ class MoviePage(View):
              movie.user_rating = 0
        
         
-        return render(request, 'cinema_city/moviePage.html', {'moviepage': movie})
+        return render(request, 'cinema_city/moviePage.html', {'moviepage': movie, 'halls': halls})
     
 
 # @login_required

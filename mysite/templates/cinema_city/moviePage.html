@@ -65,7 +65,17 @@
     <p>Описание: {{moviepage.description}}</p>
 </div>
 <hr>
-
+<h5>Сеансы на сегодня</h5>
+{% for hall in halls %}
+    <div class="cinema-info">
+        <h4>{{ hall.cinema.cinema }}</h4>
+    </div>
+    <ul class="showtimes">
+        {% for show in hall.show_movie.all %}
+            <li>{{ show.time_show }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
 
 
 
