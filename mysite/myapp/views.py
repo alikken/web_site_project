@@ -14,13 +14,15 @@ from django.core import serializers
 import json
 
 
+
+
 class HomePage(View):
     def get(self, request):
         cities = CityLocation.objects.all()
         cinema_list = Cinema.objects.all()
         print(cinema_list)
         movies = Movie.objects.all()
-
+        
         context_dict = {"city_list": cities, "cinema_list": cinema_list, "movie_title": movies}
         return render(request, 'cinema_city/homepage.html', context_dict)
 

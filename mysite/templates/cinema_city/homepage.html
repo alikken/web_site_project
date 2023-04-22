@@ -53,7 +53,9 @@
             <a href="/movie/{{f.url}}"><img src="/media/{{f.img}}" alt="{{ f.title }}"></a>
           </div>
           <div class="card-movie-info">
+            
             <h3 class="card-movie-title">{{ f.title }}</h3>
+            
             <p class="card-movie-genre">{{ f.genre }}</p>
             <p class="card-movie-rating">{{ f.average_rating|floatformat:0 }} <i class="fa fa-star checked"></i></p>
           </div>

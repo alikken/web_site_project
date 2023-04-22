@@ -19,7 +19,7 @@ $(document).ready(() => {
                    
                     $("#result").append(`
                         <div class="card-cinema">
-                            <a href="/${cinema.url}" class="text-decoration-none text-black ">
+                            <a href="/cinema/${cinema.url}" class="text-decoration-none text-black ">
                                 <div class="container-sm">
                                     <div class="card border border-0" style="width: 26rem; height: 7rem;">
                                         <div class="card-body" >
