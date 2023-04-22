@@ -43,6 +43,7 @@ class Genre(models.Model):
 class Movie(models.Model):
     title = models.CharField('Название', max_length=128)
     img = models.ImageField(upload_to='media', blank=True)
+    img_detail = models.ImageField(upload_to='media', blank=True)
     genre = models.ManyToManyField(Genre, verbose_name='Жанр')
     description = models.TextField(max_length=200, null=True, blank=True)
     url = models.SlugField(max_length=160, unique=True, blank=True, null=True)
