@@ -4,38 +4,39 @@
 {% block content %}
 
 
-
-<div class="position-absolute top-50 start-50 translate-middle"> 
-    <div class="card" style="width: 24rem; height: 22rem">
-        <div class="card-body">
-            <div class="ticketContainer">
-                <div class="ticket">
-                    <div class="ticketTitle">Кинотеатр: {{ticket.seat_number.hall.cinema}}</div>
-                    <hr>
-                    <div class="ticketDetail">
-                    <div>Фильм:&ensp;{{ticket.seat_number.hall.show_movie.all.0.movie}}</div>
-                    <div>Зал:&nbsp;{{ticket.seat_number.hall}}</div>
-                    <div>Ряд:&nbsp;{{ticket.seat_number.row}}</div>
-                    <div>Место:&nbsp;{{ticket.seat_number.col}}</div>
-                    <div>Время:&nbsp;{{ticket.seat_number.hall.show_movie.first.time_show|time:"H:i"}}</div>
-                    <div>Цена:&nbsp;{{ticket.price}}</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="position-absolute top-50 start-50 translate-middle"> 
+        <div class="card" style="width: 24rem; height: 22rem">
+            <div class="card-body">
+                <div class="ticketContainer">
+                    <div class="ticket">
+                        <div class="ticketTitle">Кинотеатр: {{ticket.seat_number.hall.cinema}}</div>
+                        <hr>
+                        <div class="ticketDetail">
+                            <div>Фильм:&ensp;{{ticket.seat_number.hall.show_movie.all.0.movie}}</div>
+                            <div>Зал:&nbsp;{{ticket.seat_number.hall}}</div>
+                            <div>Ряд:&nbsp;{{ticket.seat_number.row}}</div>
+                            <div>Место:&nbsp;{{ticket.seat_number.col}}</div>
+                            <div>Время:&nbsp;{{ticket.seat_number.hall.show_movie.first.time_show|time:"H:i"}}</div>
+                            <div>Цена:&nbsp;{{ticket.price}}</div>
+                        </div>
+                        <div class="ticketRip">
+                            <div class="circleLeft"></div>
+                            <div class="ripLine"></div>
+                            <div class="circleRight"></div>
+                        </div>
+                        <div class="ticketSubDetail">  
+                            <div class="code">LO-2314XXX</div>
+                            <div class="date"> {{ticket.date|date:"d.m.Y H:i"}}</div>
+                        </div>
                     </div>
-        
-                    <div class="ticketRip">
-                    <div class="circleLeft"></div>
-                    <div class="ripLine"></div>
-                    <div class="circleRight"></div>
-                    </div>
-        
-                    <div class="ticketSubDetail">  
-                    <div class="code">LO-2314XXX</div>
-                    <div class="date"> {{ticket.date|date:"d.m.Y H:i"}}</div>
-                    </div>
-                </div>
-            </div> 
+                </div> 
+            </div>
         </div>
     </div>
-</div>
+    <button type="submit">Сдать билет назад</button>
+</form>
 
 
 <style>

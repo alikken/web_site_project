@@ -66,18 +66,105 @@
 </div>
 <hr>
 <h5>Сеансы на сегодня</h5>
-{% for hall in halls %}
-    <div class="cinema-info">
-        <h4>{{ hall.cinema.cinema }}</h4>
+
+{% comment %} <div class="container">
+    <table class="table table-bordered border-0">
+        <thead class="table-dark">
+            <tr>
+                <th>Кинотеатр|зал</th>
+                <th>Время</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hall in halls %}
+            <tr>
+                <td>{{ hall.cinema.cinema }} {{hall}}</td>
+                <td>
+                    {% if hall.show_movie.all %}
+                    <ul class="showtimes">
+                        {% for show in hall.show_movie.all %}
+                        <li class="showtime">{{ show.time_show|time:"H:i" }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-center">Нет сеансов</p>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/cinema/{{hall.cinema.url}}" class="btn btn-primary">Кинотеатр</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div> {% endcomment %}
+
+<div class="container">
+    {% for hall in halls %}
+    <div class="card mb-3">
+        <div class="card-header">{{ hall.cinema.cinema }} {{ hall }}</div>
+        <div class="card-body row justify-content-between align-items-center">
+            <div class="col">
+                {% if hall.show_movie.all %}
+                <h5 class="card-title">Время:</h5>
+                <ul class="list-group list-group-flush">
+                    {% for show in hall.show_movie.all %}
+                    <li class="list-group-item">{{ show.time_show|time:"H:i" }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="card-text text-center">Нет сеансов</p>
+                {% endif %}
+            </div>
+            <div class="col-auto">
+                <a href="/cinema/{{ hall.cinema.url }}" class="btn btn-primary">Кинотеатр</a>
+            </div>
+        </div>
     </div>
-    <ul class="showtimes">
-        {% for show in hall.show_movie.all %}
-            <li>{{ show.time_show }}</li>
-        {% endfor %}
-    </ul>
-{% endfor %}
-
-
+    {% endfor %}
+</div>
+  
+<style>
+    /* CSS */
+    .cinema-showtimes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .cinema {
+      width: 300px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .cinema-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+    
+    .cinema-name {
+      margin: 0;
+    }
+    
+    .showtimes {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+    }
+    
+    .showtime {
+      margin-bottom: 5px;
+    }
+      
+</style>
 
 
 {% comment %} <div class="container" style="padding: 2em">

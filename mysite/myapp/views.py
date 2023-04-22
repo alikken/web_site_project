@@ -161,8 +161,24 @@ class TicketList(ListView):
 
         return queryset.filter(user=self.request.user.customuser )
     
+
+
 class TicketCheck(DetailView):
     model = Ticket
     template_name = 'cinema_city/ticketChek.html'
     context_object_name = 'ticket'
+
+    def post(self, request, *args, **kwargs):
+        ticket = self.get_object()
+        # Get the seat associated with the ticket
+        seat = ticket.seat_number
+        # Mark the seat as not busy and save it
+        seat.is_busy = False
+        seat.save()
+        # Delete the ticket and the seat
+        ticket.delete()
+        seat.delete()
+        return redirect('home')
+
+
      
