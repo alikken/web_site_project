@@ -56,8 +56,7 @@ class MoviePage(View):
         if request.user.is_authenticated:
             rating = Rating.objects.filter(movie=movie, user=request.user.customuser).first()
             movie.user_rating = rating.rating if rating else 0
-        
-        
+       
         else:
              movie.user_rating = 0
        
