@@ -40,9 +40,8 @@
       </div>
       {% endfor %}
     </div>
-  
 </div> 
-
+<hr>
 <div class="container carusel">
   <h3>Фильмы в прокате</h3>
   <div class="owl-carousel owl-theme">
@@ -61,15 +60,67 @@
           </div>
         </div>
       </div>
-      <div class="item"></div>
+      <div class="item hide">
+
+      </div>
     {% endfor %}
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="col-md-6">
+      <h3>Топ-10 фильмов</h3>
+      <div class="info">
+        {% for top in movie_top %}
+        <div class="movie-item">
+          <div class="movie-number">{{ forloop.counter }}</div>
+          <div class="movie-title">{{ top.title }}</div>
+          <div class="movie-rating">{{ top.average_rating|floatformat:2 }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </div>
 
 
+
 <style>
-  .ite, {
-    margin: 0px;
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .movie-number {
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .movie-title {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .movie-rating {
+    width: 40px;
+    text-align: center;
+  }
+  
+</style>
+
+<style>
+  .hide {
+    display: none;
   }
 
   .card-movie {

@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import json
 
-
+from django.db.models import Avg
 
 
 class HomePage(View):
@@ -22,8 +22,9 @@ class HomePage(View):
         cinema_list = Cinema.objects.all()
         print(cinema_list)
         movies = Movie.objects.all()
+        movie_top = movies.annotate(avg_rating=Avg("rating__rating")).order_by("-avg_rating")
         
-        context_dict = {"city_list": cities, "cinema_list": cinema_list, "movie_title": movies}
+        context_dict = {"city_list": cities, "cinema_list": cinema_list, "movie_title": movies, 'movie_top': movie_top}
         return render(request, 'cinema_city/homepage.html', context_dict)
 
 class CinemaDetailView(View):
