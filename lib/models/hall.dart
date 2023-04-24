@@ -43,7 +43,7 @@ import 'package:mobileapp/models/showMovie.dart';
 
 class Hall {
   int id;
-  String cinema;
+  String cinema;  //List<Cinema> cinema
   List<ShowMovie> show_movie;
   String name;
   int row_count;

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import '../models/cinema.dart';
@@ -8,7 +9,8 @@ import '../storage/storage.dart';
 import 'api_models.dart';
 // 10.10.18.123
 // 192.168.1.6
-final _base = "http://10.10.18.123:8000";
+// 172.16.59.6
+final _base = "http://172.16.59.6:8000";
 final _signInURL = "/api/token/";
 final _registrationEndpoint = "/api/registration/";
 final _CinemaEndpoint = "/api/cinema/";
@@ -69,7 +71,7 @@ Future<List<dynamic>> theaterApi() async {
 
 Future<List<dynamic>> hallApi(cinema) async {
   String url =
-      'http://10.10.18.123:8000/api/cinema/${cinema.toString()}/halls/';
+      'http://172.16.59.6:8000/api/cinema/${cinema.toString()}/halls/';
   http.Response response = await http.get(
     Uri.parse(url),
     headers: <String, String>{
@@ -81,3 +83,9 @@ Future<List<dynamic>> hallApi(cinema) async {
   print("fsdffdssss ${result}");
   return result;
 }
+
+
+
+
+
+// Future<Void> Anuar()
