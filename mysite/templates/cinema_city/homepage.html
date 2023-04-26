@@ -71,7 +71,7 @@
     <div class="col-md-6">
       <h3>Топ-10 фильмов</h3>
       <div class="info">
-        {% for top in movie_top %}
+        {% for top in movie_top|slice:":10" %}
         <a href="/movie/{{top.url}}" class="text-decoration-none text-black ">
           <div class="movie-item">
             <div class="movie-number">{{ forloop.counter }}</div>

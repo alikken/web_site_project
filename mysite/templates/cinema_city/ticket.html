@@ -8,88 +8,34 @@
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> {% endcomment %}
 
 
-    <h1>My Tickets</h1>
-    <ul>
-        {% for ticket in tickets %}
-            <a href="{% url 'ticket_check' pk=ticket.pk %}">
-                f
-            </a>
-            <li>Ticket ID: {{ ticket.id }}, Seat Number: {{ ticket.seat_number.row }}|{{ ticket.seat_number.col }}, Date: {{ ticket.date }}, Price: {{ ticket.price }}</li>
-            
+<h1>Мои билеты</h1>
+<ul class="list-group mt-3">
+    {% for ticket in tickets %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <div class="row">
+                    <div class="col-sm-2">Ряд:</div>
+                    <div class="col-sm-4">{{ ticket.seat_number.row }}</div>
+                    <div class="col-sm-2">Место:</div>
+                    <div class="col-sm-4">{{ ticket.seat_number.col }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">Дата:</div>
+                    <div class="col-sm-4">{{ ticket.date|date:"d.m.Y H:i" }}</div>
+                    <div class="col-sm-2">Цена:</div>
+                    <div class="col-sm-4">{{ ticket.price }}</div>
+                </div>
+            </div>
+            <div>
+                <a href="{% url 'ticket_check' pk=ticket.pk %}" class="btn btn-warning btn-sm">Проверить</a>
+            </div>
+        </li>
+    {% empty %}
+        <li class="list-group-item">У вас нет билетов.</li>
+    {% endfor %}
+</ul>
 
 
-        {% empty %}
-            <li>You have no tickets.</li>
-        {% endfor %}
-    </ul>
 
 
-
-
-
-
-<style>
-    /* Main Ticket Style */
-    .ticketContainer{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: orange;
-    }
-    .ticket{
-        animation: bouncingCard 0.6s ease-out infinite alternate;
-        background-color: white;
-        color: darkslategray;
-        border-radius: 12px;
-    }
-
-    /* Ticket Content */
-    .ticketTitle{
-        font-size: 1.5rem;
-        font-weight: 700;
-        padding: 12px 16px 4px;
-    }
-    hr{
-        width: 90%;
-        border: 1px solid #efefef;
-    }
-    .ticketDetail{
-        font-size: 1.1rem;
-        font-weight: 500;
-        padding: 4px 16px;
-    }
-    .ticketSubDetail{
-        display: flex;
-        justify-content: space-between;
-        font-size: 1rem;
-        padding: 12px 16px;
-    }
-    .ticketSubDetail .code{
-        margin-right: 24px;
-    }
-
-    /* Ticket Ripper */
-    .ticketRip{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .circleLeft{
-        width: 12px;
-        height: 24px;
-        background-color: orange;
-        border-radius: 0 12px 12px 0;
-    }
-    .ripLine{
-        width: 100%;
-        border-top: 3px solid orange;
-        border-top-style: dashed ;
-    }
-    .circleRight{
-        width: 12px;
-        height: 24px;
-        background-color: orange;
-        border-radius: 12px 0 0 12px;
-    }
-</style>
 {% endblock content %}

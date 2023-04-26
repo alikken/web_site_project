@@ -2,35 +2,67 @@
 
 {% block content %}
 
-{% comment %} <input type="hidden" id="hallID" value="{{hall.id}}"> {% endcomment %}
 
+<div class="row titleCinema">
+    <div class="col-6 image d-flex justify-content-center">
+        <img src="/media/{{cinema.image_detail}}" class="rounded shadow img-fluid" alt="Cinema Poster" style="object-fit: cover; object-position: center; height: 300px; width: 100%;">
+      </div>
+      
+    <div class="col-6">
+        <h3 class="text">{{cinema.cinema}}</h3>
+        <h5>Адрес: {{cinema.address}}</h1>
+        
+    </div>
+</div>
+<div class="desript container py-4">
+    <p class="text-muted">Информация: {{cinema.info}}</p>
+</div>
+<hr>
+<h5>Зал:</h5>
 
+<div class="container">
+    {% for hall in halls %}
+    <div class="card mb-3">
+        <div class="card-header">{{ hall }}</div>
+        <div class="card-body row justify-content-between align-items-center">
+            <div class="col">
+                {% if hall.show_movie.all %}
+                <h5 class="card-title">Показы:</h5>
+                <ul class="list-group list-group-flush">
+                    {% for show in hall.show_movie.all %}
+                    <li class="list-group-item">{{show.movie.title}} {{ show.time_show|time:"H:i" }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="card-text text-center">Нет сеансов</p>
+                {% endif %}
+            </div>
+            <div class="col-auto">
+                <a href="/halls/{{hall.id}}/" class="btn btn-warning">Купить билет</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
-<h3>Кинотеатр - {{cinema.cinema}}</h3>
-<h3>URL: {{cinema.url}}</h3>
-<h3>{{cinema.city}}</h3>
-
-
-
-{% for hall in halls %}
-    <li><a href="/halls/{{hall.id}}/">Купить Билет</a></li>
-
-    <button type="button" data-hall-id="{{hall.id}}" id="{{hall.id}}"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Купить билет
-    </button>
-
-
-    <p>{{hall.id}} {{ hall.name }}</p>
-    <ul>
-        {% for show_movie in hall.show_movie.all %}
-            <li>{{ show_movie.movie_show.title }} at {{ show_movie.time_show|time:"H:i" }}</li>
-        {% endfor %}
-    </ul>
-    
-{% endfor %}
-
-
-
+<style>
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%; 
+        background-color: orange;
+      }
+      
+    .titleCinema {
+        padding: 10px;
+    }
+    .desript p {
+        font-size: 18px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+</style>
 
 
 <script src="/static/js/main.js"></script>

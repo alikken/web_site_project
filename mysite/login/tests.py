@@ -38,5 +38,6 @@ class CustomLoginTestCase(TestCase):
         response = self.client.post(self.url, self.credentials)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('home'))
+        
         response = self.client.get(reverse('home'))
         self.assertRedirects(response, f"{reverse('login')}?next={reverse('home')}")

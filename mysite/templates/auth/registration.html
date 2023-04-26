@@ -13,15 +13,16 @@
                   <form class="mb-3 mt-md-4" method="POST">
                     {% csrf_token %}
                     <h2 class="fw-bold mb-2 text-uppercase ">Cinema</h2>
-                    <p class=" mb-5">Пожалуйста ведите логин и пароль</p>
+                    <p class=" mb-5">Пожалуйста заполните все поля</p>
                     {%for field in form%}
                       <div class="mb-3">
-                        <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>
+                        <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}} <span style="color: red">{{ field.errors|striptags }}</span></p>
                       </div>
+
                     {% endfor %}
               
                     <div class="d-grid">
-                        <button class="btn btn-outline-dark" type="submit">Sign in</button>
+                        <button class="btn btn-warning" type="submit">Зарегистрироваться</button>
                     </div>
                   </form>
               </div>

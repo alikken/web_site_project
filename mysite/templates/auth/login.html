@@ -12,7 +12,7 @@
                 <div class="card-body p-5">
                     <form class="mb-3 mt-md-4" method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <h2 class="fw-bold mb-2 text-uppercase ">Cinema</h2>
+                        <h2 class="fw-bold mb-2 text-uppercase ">ALIK Cinema</h2>
                         <p class=" mb-5">Пожалуйста ведите логин и пароль</p>
                         
                         {%for field in form%}
@@ -21,13 +21,13 @@
                         </div>
                         {% endfor %}
 
-                        <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p>
+                        
                         <div class="d-grid">
-                            <button class="btn btn-outline-dark" type="submit">Login</button>
+                            <button class="btn btn-warning" type="submit">Войти</button>
                         </div>
                     </form>
                     <div>
-                    <p class="mb-0  text-center">нет учетной записи? <a href="{% url 'register' %}" class="text-primary fw-bold">зарегистрироваться</a></p>
+                    <p class="mb-0  text-center">нет учетной записи? <a href="{% url 'register' %}" class="text-dark fw-bold">зарегистрироваться</a></p>
                     </div>
                 </div>
             </div>

@@ -5,13 +5,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-{% comment %} <p>{{moviepage.title}}</p> {% endcomment %}
-{% comment %} <img src="/media/{{moviepage.detail_img}}" alt=""> {% endcomment %}
-{% comment %} <h1>{{ moviepage.header }}</h1>
-<p>{{ moviepage.text }}</p>
-<p>Рейтинг: {{ moviepage.average_rating }}</p>
-<p>Ваша оценка: {{ moviepage.user_rating }}</p> {% endcomment %}
-
 <div class="row titleMovie">
     <div class="col-6 image d-flex justify-content-center">
         <img src="/media/{{moviepage.img_detail}}" class="rounded shadow img-fluid" alt="Movie Poster">
@@ -67,39 +60,6 @@
 <hr>
 <h5>Сеансы на сегодня</h5>
 
-{% comment %} <div class="container">
-    <table class="table table-bordered border-0">
-        <thead class="table-dark">
-            <tr>
-                <th>Кинотеатр|зал</th>
-                <th>Время</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for hall in halls %}
-            <tr>
-                <td>{{ hall.cinema.cinema }} {{hall}}</td>
-                <td>
-                    {% if hall.show_movie.all %}
-                    <ul class="showtimes">
-                        {% for show in hall.show_movie.all %}
-                        <li class="showtime">{{ show.time_show|time:"H:i" }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                    <p class="text-center">Нет сеансов</p>
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="/cinema/{{hall.cinema.url}}" class="btn btn-primary">Кинотеатр</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div> {% endcomment %}
-
 <div class="container">
     {% for hall in halls %}
     <div class="card mb-3">
@@ -118,7 +78,7 @@
                 {% endif %}
             </div>
             <div class="col-auto">
-                <a href="/cinema/{{ hall.cinema.url }}" class="btn btn-primary">Кинотеатр</a>
+                <a href="/cinema/{{ hall.cinema.url }}" class="btn btn-warning">Кинотеатр</a>
             </div>
         </div>
     </div>
@@ -165,44 +125,6 @@
     }
       
 </style>
-
-
-{% comment %} <div class="container" style="padding: 2em">
-    <h5 class="card-title">Avg rating:
-        <span class="fa fa-star {% if moviepage.average_rating > 0 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 1 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 2 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 3 %} checked {% endif %}" ></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 4 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 5 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 6 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 7 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 8 %} checked {% endif %}"></span>
-        <span class="fa fa-star {% if moviepage.average_rating > 9 %} checked {% endif %}"></span>
-    </h5>
-    <ul class="btn btn-light list-inline rating-list">
-        <li onclick="rate(10, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 9 %} checked {% endif %}" title="Rate 10"></i></li>
-        <li onclick="rate(9, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 8 %} checked {% endif %}" title="Rate 9"></i></li>
-        <li onclick="rate(8, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 7 %} checked {% endif %}" title="Rate 8"></i></li>
-        <li onclick="rate(7, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 6 %} checked {% endif %}" title="Rate 7"></i></li>
-        <li onclick="rate(6, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 5 %} checked {% endif %}" title="Rate 6"></i></li>
-        <li onclick="rate(5, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 4 %} checked {% endif %}" title="Rate 5"></i></li>
-        <li onclick="rate(4, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 3 %} checked {% endif %}" title="Rate 4"></i></li>
-        <li onclick="rate(3, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 2 %} checked {% endif %}" title="Rate 3"></i></li>
-        <li onclick="rate(2, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 1 %} checked {% endif %}" title="Rate 2"></i></li>
-        <li onclick="rate(1, {{ moviepage.url }})">
-            <i class="fa fa-star {% if moviepage.user_rating > 0 %} checked {% endif %}" title="Rate 1"></i></li>
-    </ul>
-</div> {% endcomment %}
 
 <script>
     const rate = (rating, movie_id) => {

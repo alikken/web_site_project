@@ -29,11 +29,12 @@ class HallApi(APIView):
     def get(self, request, cinema_id):
         halls = Hall.objects.filter(cinema__id=cinema_id)
         serializer = HallSerializer(halls, many=True)
-        print(serializer.data)
+        print("ALIKAAAAAAAAAAAAAAAAAAA",serializer.data)
         
         return HttpResponse(json.dumps(serializer.data))
     
-
+    def post(self, request):
+        pass
     
 class BookTicketsApi(CreateAPIView):
     queryset = Seat.objects.all()
