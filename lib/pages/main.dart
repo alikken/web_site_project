@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/controllers/home_controller.dart';
 import 'package:mobileapp/storage/storage.dart';
 import 'auth/login.dart';
 import 'cinema/cinema.dart';
-import 'cinema/hallPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,12 +16,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }

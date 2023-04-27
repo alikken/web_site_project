@@ -1,9 +1,9 @@
+import 'package:mobileapp/models/cinema.dart';
 import 'package:mobileapp/models/showMovie.dart';
-
 
 class Hall {
   int id;
-  String cinema;  //List<Cinema> cinema
+  Theater cinema; //List<Cinema> cinema
   List<ShowMovie> show_movie;
   String name;
   int row_count;
@@ -20,8 +20,10 @@ class Hall {
 
   factory Hall.fromJson(Map<String, dynamic> json) {
     List<ShowMovie> show_movie = [];
-
     List<dynamic> show_movieJson = json['show_movie'];
+
+    
+
     show_movieJson.forEach(
       (element) {
         ShowMovie item = ShowMovie.fromJson(Map<String, dynamic>.from(element));

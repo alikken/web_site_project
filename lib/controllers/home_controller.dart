@@ -56,10 +56,13 @@ class HomeController {
       List<dynamic> showMovieJson = element['show_movie'];
       List<ShowMovie> showMovieList =
           showMovieJson.map((e) => ShowMovie.fromJson(e)).toList();
+
+      Theater cinema = Theater.fromJson(element['cinema']);
+
       hallCinema.add(Hall(
           id: element['id'],
           // cinema: element['cinema'],
-          cinema: element['cinema'],
+          cinema: cinema,
           show_movie: showMovieList,
           name: element['name'],
           row_count: element['row_count'],

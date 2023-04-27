@@ -43,7 +43,7 @@ class _HallListScreenState extends State<HallListScreen> {
               itemBuilder: (BuildContext context, int index) {
                 Hall hall = _hallList[index];
                 print(
-                    'ALIKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA${hall.cinema}');
+                    'ALIKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA${(hall.cinema.cinema)}');
                 return ElevatedButton(
                   onPressed: () {
                     Navigator.push(

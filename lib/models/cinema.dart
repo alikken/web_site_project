@@ -29,4 +29,4 @@ class Theater {
   }
 }
 
-class TheaterDetail {}
+

@@ -6,6 +6,8 @@ import '../main.dart';
 
 
 class Registration extends StatefulWidget {
+  Registration({super.key});
+
 
   @override
   State<Registration> createState() => _RegistrationState();
