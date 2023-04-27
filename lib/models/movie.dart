@@ -4,7 +4,7 @@ class Movie {
   int id;
   List<Genre> genre;
   String title;
-  String image;
+  String img;
   String description;
   String url;
 
@@ -12,7 +12,7 @@ class Movie {
     required this.id,
     required this.genre,
     required this.title,
-    required this.image,
+    required this.img,
     required this.description,
     required this.url,
   });
@@ -27,13 +27,15 @@ class Movie {
         genre.add(item);
       },
     );
+
     return Movie(
       id: json['id'],
       genre: genre,
       title: json['title'],
-      image: json['image'],
+      img: json['img'],
       description: json['description'],
       url: json['url']
     );
   }
 }
+

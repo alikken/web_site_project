@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mobileapp/storage/storage.dart';
 import 'auth/login.dart';
 import 'cinema/cinema.dart';
+import 'cinema/moviePage.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -31,6 +34,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final SecureStorage storage = SecureStorage();
   String? _username = "";
+  //navbar
+  int currentPage = 0;
+  List<Widget> pages = [
+    TheaterPage(),
+    MoviePage(),
+    Scaffold(),
+  ];
 
   @override
   void initState() {
@@ -80,13 +90,43 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(button_text))
         ],
       ),
-      body: TheaterPage(),
+      body: pages[currentPage], // направление страниц navbar
+
+      bottomNavigationBar: Container(
+        color: Colors.lightBlue,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+          child: GNav(
+            backgroundColor: Colors.lightBlue,
+            color: Colors.white,
+            activeColor: Colors.white,
+            tabBackgroundColor: Colors.grey,
+            gap: 8,
+            onTabChange: (index) {
+              setState(() {
+                currentPage = index;
+              });
+              print(index);
+            },
+            selectedIndex: currentPage,
+            padding: EdgeInsets.all(16),
+            tabs: const [
+              GButton(
+                icon: Icons.theaters_sharp,
+                text: "Кинотеатры",
+              ),
+              GButton(
+                icon: Icons.movie,
+                text: "Фильмы",
+              ),
+              GButton(
+                icon: Icons.list,
+                text: "Мои билеты",
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
-
-
-
-
-

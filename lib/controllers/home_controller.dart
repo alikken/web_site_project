@@ -1,9 +1,12 @@
 import 'package:mobileapp/models/cinema.dart';
+import 'package:mobileapp/models/createSeat.dart';
 import 'package:mobileapp/models/hall.dart';
+import 'package:mobileapp/models/movie.dart';
 import 'package:mobileapp/storage/storage.dart';
 
 import '../api/api_connect.dart';
 import '../api/api_models.dart';
+import '../models/genre.dart';
 import '../models/showMovie.dart';
 
 class HomeController {
@@ -51,7 +54,7 @@ class HomeController {
   Future<List<Hall>> getHall(int cinema) async {
     List<Hall> hallCinema = [];
     List<dynamic> result = await hallApi(cinema);
-    
+
     result.forEach((element) {
       List<dynamic> showMovieJson = element['show_movie'];
       List<ShowMovie> showMovieList =
@@ -71,5 +74,37 @@ class HomeController {
 
     print('HallCinema: ${hallCinema}');
     return hallCinema;
+  }
+
+  Future<List<Movie>> getMovie() async {
+    List<Movie> allMovie = [];
+    List<dynamic> result = await movieApi();
+
+    result.forEach((element) {
+      List<dynamic> genreJson = element['genre'];
+      List<Genre> genre = [];
+      genreJson.forEach((genreElement) {
+        genre.add(Genre.fromJson(genreElement));
+      });
+
+      allMovie.add(Movie(
+          id: element['id'],
+          genre: genre,
+          title: element['title'],
+          img: element['img'],
+          description: element['description'],
+          url: element['url']));
+    });
+    return allMovie;
+  }
+
+  Future<String> CreateBookingSeat(int row, int col, bool is_busy) async {
+    dynamic reply = '';
+    if (row != null) {
+      CreateSeat seat = CreateSeat(row: row, col: col, is_busy: is_busy);
+      String reply = await createSeatApi(seat);
+    }
+    print('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAAAAAAAAAAAAAAAAA${reply}');
+    return reply;
   }
 }
