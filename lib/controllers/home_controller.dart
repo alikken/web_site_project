@@ -34,9 +34,7 @@ class HomeController {
 
   Future<List<Theater>> getTheater() async {
     List<Theater> allTheater = [];
-    print(allTheater);
     List<dynamic> result = await theaterApi();
-    print('FSDFSDFSDF ${result}');
     result.forEach((element) {
       allTheater.add(Theater(
           id: element['id'],
@@ -47,36 +45,20 @@ class HomeController {
           image_detail: element['image_detail'],
           info: element['info']));
     });
-    print('SOSISOSISOSI ${allTheater}');
     return allTheater;
   }
 
-  // Future<List<Hall>> getHall(int cinema) async {
-  //   List<Hall> hallCinema = [];
-  //   List<dynamic> result = await hallApi(cinema);
-
-  //   result.forEach((element) {
-  //     hallCinema.add(Hall(
-  //         id: element['id'],
-  //         cinema: element['cinema'],
-  //         show_movie: element['show_movie'],
-  //         name: element['name'],
-  //         row_count: element['row_count'],
-  //         col_count: element['col_count']));
-  //   });
-  //   print('SSSSSSSSSSSSSSSADADWDASWWD ${hallCinema}');
-  //   return hallCinema;
-  // }
   Future<List<Hall>> getHall(int cinema) async {
     List<Hall> hallCinema = [];
     List<dynamic> result = await hallApi(cinema);
-
+    
     result.forEach((element) {
       List<dynamic> showMovieJson = element['show_movie'];
       List<ShowMovie> showMovieList =
           showMovieJson.map((e) => ShowMovie.fromJson(e)).toList();
       hallCinema.add(Hall(
           id: element['id'],
+          // cinema: element['cinema'],
           cinema: element['cinema'],
           show_movie: showMovieList,
           name: element['name'],

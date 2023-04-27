@@ -10,7 +10,7 @@ import 'api_models.dart';
 // 10.10.18.123
 // 192.168.1.6
 // 172.16.59.6
-final _base = "http://172.16.59.6:8000";
+final _base = "http://192.168.1.6:8000";
 final _signInURL = "/api/token/";
 final _registrationEndpoint = "/api/registration/";
 final _CinemaEndpoint = "/api/cinema/";
@@ -55,7 +55,6 @@ Future<List<dynamic>> theaterApi() async {
   String url = _cinema;
   if (asd != null) {
     url = url + '?username=' + asd;
-    print("fSFSfsefesfsef ${url}");
   }
   http.Response response = await http.get(
     Uri.parse(url),
@@ -65,13 +64,12 @@ Future<List<dynamic>> theaterApi() async {
   );
 
   List<dynamic> result = json.decode(utf8.decode(response.bodyBytes));
-  // print(result);
   return result;
 }
 
 Future<List<dynamic>> hallApi(cinema) async {
   String url =
-      'http://172.16.59.6:8000/api/cinema/${cinema.toString()}/halls/';
+      'http://192.168.1.6:8000/api/cinema/${cinema.toString()}/halls/';
   http.Response response = await http.get(
     Uri.parse(url),
     headers: <String, String>{

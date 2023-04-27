@@ -3,60 +3,7 @@ import 'package:mobileapp/models/hall.dart';
 
 import '../../controllers/home_controller.dart';
 
-// class HallPage extends StatefulWidget {
-//   final HomeController _homeController = HomeController();
 
-//   HallPage({super.key});
-
-//   @override
-//   State<HallPage> createState() => _HallPageState();
-// }
-
-// class _HallPageState extends State<HallPage> {
-//   List<Hall> _listHall = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     widget._homeController.getHall().then((listHall) {
-//       setState(() {
-//         _listHall = listHall;
-//       });
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // final itemHall = _listHall[_listHall.length-index-1];
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.lightBlue,
-//         title: const Text('ЖКХ услуги'),
-//       ),
-//       body: Container(
-//         width: double.infinity,
-//         height: double.infinity,
-//         child: ListView.builder(
-//           itemCount: _listHall.length,
-//           itemBuilder: (context, index) {
-//             final itemHall = _listHall[_listHall.length - index - 1];
-//             return Container(
-//               alignment: Alignment.center,
-//               child: Text(
-//                 itemHall.name,
-//                 style: TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class HallListScreen extends StatefulWidget {
   final HomeController _homeController = HomeController();
@@ -95,6 +42,8 @@ class _HallListScreenState extends State<HallListScreen> {
               itemCount: _hallList.length,
               itemBuilder: (BuildContext context, int index) {
                 Hall hall = _hallList[index];
+                print(
+                    'ALIKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA${hall.cinema}');
                 return ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -115,14 +64,11 @@ class _HallListScreenState extends State<HallListScreen> {
   }
 }
 
-
-
 // зал
 class SeatSelectionPage extends StatefulWidget {
   final Hall hall;
 
   SeatSelectionPage({required this.hall});
-
   @override
   _SeatSelectionPageState createState() => _SeatSelectionPageState();
 }
